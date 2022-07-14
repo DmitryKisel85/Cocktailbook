@@ -1,11 +1,13 @@
+import Header from "./components/header";
+import MainBlock from "./components/main-block";
+
 import "./App.css";
 
 function App() {
 	return (
 		<div className='App'>
-			<div>COCKTAIL BOOK</div>
-			<div>COCKTAIL BOOK</div>
-			<div>COCKTAIL BOOK</div>
+			<Header />
+			<MainBlock />
 		</div>
 	);
 }
