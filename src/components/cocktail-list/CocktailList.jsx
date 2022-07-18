@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { cocktailsSelector } from "../../store/cocktailSelector";
 
 import CocktailListItem from "../cocktail-list-item/";
+import Modal from "../modal";
 
 import { addCocktail } from "../../store/cocktailSlice";
 
@@ -10,7 +12,8 @@ import "./cocktailList.scss";
 
 const CocktailList = () => {
 	const cocktails = useSelector(cocktailsSelector);
-	console.log(cocktails);
+
+	const [modalActive, setModalActive] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -35,9 +38,12 @@ const CocktailList = () => {
 	return (
 		<ul className='cocktail-list'>
 			{cocktailListToRender}
-			<button className='addButton' onClick={handleClick}>
+			<button className='addButton' onClick={() => setModalActive(true)}>
 				Add cocktail
 			</button>
+			<Modal active={modalActive} setActive={setModalActive}>
+				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, cumque.
+			</Modal>
 		</ul>
 	);
 };
