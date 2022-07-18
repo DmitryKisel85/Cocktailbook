@@ -5,6 +5,7 @@ import { cocktailsSelector } from "../../store/cocktailSelector";
 
 import CocktailListItem from "../cocktail-list-item/";
 import Modal from "../modal";
+import ModalAddForm from "../modal-add-form";
 
 import { addCocktail } from "../../store/cocktailSlice";
 
@@ -42,7 +43,7 @@ const CocktailList = () => {
 				Add cocktail
 			</button>
 			<Modal active={modalActive} setActive={setModalActive}>
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, cumque.
+				<ModalAddForm />
 			</Modal>
 		</ul>
 	);
