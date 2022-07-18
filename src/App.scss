@@ -1,0 +1,34 @@
+@import "./styles/variables.scss";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Syne", sans-serif;
+}
+
+.App {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: 800px;
+	padding: 40px 60px;
+	margin: 50px auto;
+	border-radius: 15px;
+	color: $textColor;
+	background-image: linear-gradient(
+		45deg,
+		hsl(35deg 48% 43%) 0%,
+		hsl(35deg 48% 46%) 11%,
+		hsl(35deg 48% 50%) 21%,
+		hsl(35deg 54% 53%) 31%,
+		hsl(35deg 56% 55%) 41%,
+		hsl(36deg 56% 56%) 51%,
+		hsl(36deg 56% 57%) 60%,
+		hsl(36deg 56% 59%) 70%,
+		hsl(35deg 56% 62%) 80%,
+		hsl(35deg 56% 65%) 90%,
+		hsl(35deg 56% 68%) 100%
+	);
+}

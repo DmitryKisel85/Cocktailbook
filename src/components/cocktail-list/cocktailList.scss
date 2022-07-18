@@ -1,4 +1,41 @@
+@import "../../styles/variables.scss";
+
 .cocktail-list {
+	display: flex;
+	flex-direction: column;
 	margin: 0 auto;
-	width: 800px;
+	width: 100%;
+}
+
+.addButton {
+	border: 0;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: $textColor;
+	background-color: transparent;
+	border: 1px solid $textColor;
+
+	&:hover {
+		background-image: linear-gradient(
+			90deg,
+			hsl(35deg 48% 43%) 0%,
+			hsl(35deg 48% 46%) 11%,
+			hsl(35deg 48% 50%) 21%,
+			hsl(35deg 54% 53%) 31%,
+			hsl(35deg 56% 55%) 41%,
+			hsl(36deg 56% 56%) 51%,
+			hsl(36deg 56% 57%) 60%,
+			hsl(36deg 56% 59%) 70%,
+			hsl(35deg 56% 62%) 80%,
+			hsl(35deg 56% 65%) 90%,
+			hsl(35deg 56% 68%) 100%
+		);
+	}
+
+	&:active {
+		transform: translateY(3px);
+	}
 }

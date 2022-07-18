@@ -1,27 +1,4 @@
-// @import "@styles/variables.scss";
-
-// h1 {
-// 	font-weight: 300;
-// 	font-size: 60px;
-// 	text-align: center;
-// }
-
-// .header {
-// 	padding: 35px 0;
-// }
-
-// @media (max-width: $tablet) {
-// 	h1 {
-// 		font-size: 48px;
-// 	}
-// }
-
-// @media (max-width: $mobile) {
-// 	h1 {
-// 		font-size: 36px;
-// 	}
-
-// 	.header {
-// 		padding: 25px 0;
-// 	}
-// }
+.header {
+	text-transform: uppercase;
+	margin-bottom: 40px;
+}

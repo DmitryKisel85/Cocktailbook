@@ -1,7 +1,7 @@
 import Header from "./components/header";
 import MainBlock from "./components/main-block";
 
-import "./App.css";
+import "./App.scss";
 
 function App() {
 	return (
