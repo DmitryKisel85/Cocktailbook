@@ -15,6 +15,7 @@ const modalWindowSlice = createSlice({
 		},
 		hideModalWindow: (state) => {
 			state.modalWindowIsOpen = false;
+			state.typeOfModalWindow = "";
 		},
 	},
 });

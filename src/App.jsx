@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import Header from "./components/header";
@@ -15,6 +16,14 @@ function App() {
 	const typeOfModal = useSelector(modalWindowTypeSelector);
 
 	console.log(modalState, typeOfModal);
+
+	// блокируем скролл, когда открыто модальное окно
+	useEffect(() => {
+		if (modalState) {
+			document.body.style.overflow = "hidden";
+			return () => (document.body.style.overflow = "unset");
+		}
+	}, [modalState]);
 
 	return (
 		<div className='App'>

@@ -43,7 +43,6 @@ const ModalAddForm = () => {
 	const dispatch = useDispatch();
 
 	const formSubmitHandler = (data) => {
-		console.log(data);
 		const newCocktail = {
 			id: uuidv4(),
 			...data,
