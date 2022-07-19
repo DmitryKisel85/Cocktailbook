@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { cocktailsSelector } from "../../store/cocktailSelector";
@@ -13,6 +13,14 @@ const CocktailList = () => {
 	const cocktails = useSelector(cocktailsSelector);
 
 	const [modalActive, setModalActive] = useState(false);
+
+	// блокируем скролл, когда открыто модальное окно
+	useEffect(() => {
+		if (modalActive) {
+			document.body.style.overflow = "hidden";
+			return () => (document.body.style.overflow = "unset");
+		}
+	}, [modalActive]);
 
 	const cocktailListToRender = cocktails.map((cocktail) => {
 		return <CocktailListItem key={cocktail.id} cocktail={cocktail} />;

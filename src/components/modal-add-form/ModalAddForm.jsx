@@ -11,6 +11,7 @@ import { addCocktail } from "../../store/cocktailSlice";
 
 import "./modalAddForm.scss";
 
+// устанавливаем цвет нашей формы как 'primary'
 const theme = createTheme({
 	palette: {
 		primary: {
@@ -19,6 +20,7 @@ const theme = createTheme({
 	},
 });
 
+// проверка элементов формы на валидность
 const schema = yup.object().shape({
 	name: yup.string().min(2).required(),
 	ingredients: yup.string().min(2).required(),
@@ -46,6 +48,7 @@ const ModalAddForm = ({ setActive }) => {
 			...data,
 		};
 		dispatch(addCocktail(newCocktail));
+		reset();
 		setActive(false);
 	};
 
