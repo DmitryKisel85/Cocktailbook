@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { modalWindowSelector } from "../../store/modalWindowSelector";
+import { modalWindowIsOpenSelector } from "../../store/modalWindowSelector";
 
 import { hideModalWindow } from "../../store/modalWindowSlice";
 
 import "./modal.scss";
 
 const Modal = ({ children }) => {
-	const modalState = useSelector(modalWindowSelector);
+	const modalState = useSelector(modalWindowIsOpenSelector);
+	console.log(modalState);
 
 	const dispatch = useDispatch();
 

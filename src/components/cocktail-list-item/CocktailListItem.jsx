@@ -1,12 +1,6 @@
-import { useState } from "react";
-
-import Modal from "../modal";
-
 import "./cocktailListItem.scss";
 
 const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageUrl } }) => {
-	const [modalActive, setModalActive] = useState(false);
-
 	return (
 		<>
 			<div className='cocktail-list-item'>
@@ -16,7 +10,7 @@ const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageU
 				<div className='cocktail-list-item__description-block'>
 					<div className='cocktail-list-item__header'>
 						<h2 className='cocktail-list-item__title'>{name}</h2>
-						<button onClick={() => setModalActive(true)}>Preview</button>
+						<button onClick={() => {}}>Preview</button>
 					</div>
 					<p className='cocktail-list-item__description'>
 						<b>Ingredients:</b> {ingredients}
@@ -28,9 +22,6 @@ const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageU
 						<b>Glass:</b> {glass}
 					</p>
 				</div>
-				<Modal active={modalActive} setActive={setModalActive}>
-					HelloWorld!
-				</Modal>
 			</div>
 		</>
 	);
