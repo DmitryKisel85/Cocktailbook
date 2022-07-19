@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { hideModalWindow } from "../../store/modalWindowSlice";
 import { addCocktail } from "../../store/cocktailSlice";
 
 import "./modalAddForm.scss";
@@ -29,7 +30,7 @@ const schema = yup.object().shape({
 	imageUrl: yup.string(),
 });
 
-const ModalAddForm = ({ setActive }) => {
+const ModalAddForm = () => {
 	const {
 		handleSubmit,
 		control,
@@ -49,7 +50,7 @@ const ModalAddForm = ({ setActive }) => {
 		};
 		dispatch(addCocktail(newCocktail));
 		reset();
-		setActive(false);
+		dispatch(hideModalWindow());
 	};
 
 	const ModalAddFormInput = ({ name, label }) => {

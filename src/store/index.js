@@ -4,9 +4,11 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from "redux-persist/lib/storage";
 
 import cocktailReducer from "./cocktailSlice";
+import modalWindowReducer from "./modalWindowSlice";
 
 const rootReducer = combineReducers({
 	cocktails: cocktailReducer,
+	modalWindow: modalWindowReducer,
 });
 
 const persistConfig = {

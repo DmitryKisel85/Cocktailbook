@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { cocktailsSelector } from "../../store/cocktailSelector";
+import { modalWindowSelector } from "../../store/modalWindowSelector";
+
+import { showModalWindow } from "../../store/modalWindowSlice";
 
 import CocktailListItem from "../cocktail-list-item/";
 import Modal from "../modal";
@@ -11,16 +14,17 @@ import "./cocktailList.scss";
 
 const CocktailList = () => {
 	const cocktails = useSelector(cocktailsSelector);
+	const modalState = useSelector(modalWindowSelector);
 
-	const [modalActive, setModalActive] = useState(false);
+	const dispatch = useDispatch();
 
 	// блокируем скролл, когда открыто модальное окно
 	useEffect(() => {
-		if (modalActive) {
+		if (modalState) {
 			document.body.style.overflow = "hidden";
 			return () => (document.body.style.overflow = "unset");
 		}
-	}, [modalActive]);
+	}, [modalState]);
 
 	const cocktailListToRender = cocktails.map((cocktail) => {
 		return <CocktailListItem key={cocktail.id} cocktail={cocktail} />;
@@ -29,12 +33,15 @@ const CocktailList = () => {
 	return (
 		<ul className='cocktail-list'>
 			{cocktailListToRender}
-			<button className='addButton' onClick={() => setModalActive(true)}>
+			<button className='addButton' onClick={() => dispatch(showModalWindow())}>
 				Add cocktail
 			</button>
-			<Modal active={modalActive} setActive={setModalActive}>
-				<ModalAddForm setActive={setModalActive} />
-			</Modal>
+
+			{modalState && (
+				<Modal>
+					<ModalAddForm />
+				</Modal>
+			)}
 		</ul>
 	);
 };

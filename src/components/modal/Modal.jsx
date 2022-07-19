@@ -1,9 +1,19 @@
+import { useSelector, useDispatch } from "react-redux";
+
+import { modalWindowSelector } from "../../store/modalWindowSelector";
+
+import { hideModalWindow } from "../../store/modalWindowSlice";
+
 import "./modal.scss";
 
-const Modal = ({ active, setActive, children }) => {
+const Modal = ({ children }) => {
+	const modalState = useSelector(modalWindowSelector);
+
+	const dispatch = useDispatch();
+
 	return (
-		<div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
-			<div className={active ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
+		<div className={modalState ? "modal active" : "modal"} onClick={() => dispatch(hideModalWindow())}>
+			<div className={modalState ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
 				{children}
 			</div>
 		</div>

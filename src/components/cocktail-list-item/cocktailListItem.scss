@@ -23,6 +23,12 @@
 		justify-content: center;
 	}
 
+	&__header {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+
 	&__title {
 		margin-bottom: 15px;
 	}
