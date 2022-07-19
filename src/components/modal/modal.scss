@@ -20,11 +20,28 @@
 
 .modal__content {
 	width: 30vw;
-	padding: 20px;
 	border-radius: 12px;
-	background-color: #fff;
 	transform: scale(0.5);
 	transition: all 0.3s;
+	display: flex;
+	flex-direction: column;
+	padding: 30px 40px;
+	gap: 20px;
+	// background-color: #e0bf91;
+	background-image: linear-gradient(
+		40deg,
+		hsl(35deg 56% 54%) 0%,
+		hsl(35deg 56% 56%) 3%,
+		hsl(35deg 56% 58%) 8%,
+		hsl(35deg 56% 59%) 13%,
+		hsl(35deg 56% 61%) 20%,
+		hsl(35deg 56% 63%) 29%,
+		hsl(35deg 56% 65%) 40%,
+		hsl(35deg 56% 67%) 54%,
+		hsl(35deg 56% 69%) 71%,
+		hsl(35deg 56% 71%) 87%,
+		hsl(35deg 56% 72%) 100%
+	);
 }
 
 .modal__content.active {

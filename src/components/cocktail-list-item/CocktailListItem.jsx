@@ -1,6 +1,6 @@
 import "./cocktailListItem.scss";
 
-const CocktailListItem = ({ cocktail: { title, ingredients, method, glass, imageUrl } }) => {
+const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageUrl } }) => {
 	return (
 		<>
 			<div className='cocktail-list-item'>
@@ -8,7 +8,7 @@ const CocktailListItem = ({ cocktail: { title, ingredients, method, glass, image
 					<img src={imageUrl} alt='cocktail' />
 				</div>
 				<div className='cocktail-list-item__description-block'>
-					<h2 className='cocktail-list-item__title'>{title}</h2>
+					<h2 className='cocktail-list-item__title'>{name}</h2>
 					<p className='cocktail-list-item__description'>
 						<b>Ingredients:</b> {ingredients}
 					</p>

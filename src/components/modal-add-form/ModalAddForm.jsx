@@ -1,109 +1,102 @@
 import { useForm, Controller } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { v4 as uuidv4 } from "uuid";
 
-import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button } from "@mui/material";
+import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { addCocktail } from "../../store/cocktailSlice";
+
+import "./modalAddForm.scss";
+
+const theme = createTheme({
+	palette: {
+		primary: {
+			main: "#40312a",
+		},
+	},
+});
 
 const schema = yup.object().shape({
 	name: yup.string().min(2).required(),
 	ingredients: yup.string().min(2).required(),
 	method: yup.string(),
-	imageUrl: yup.string().min(2),
+	glass: yup.string().min(2).required(),
+	imageUrl: yup.string(),
 });
 
-const ModalAddForm = () => {
+const ModalAddForm = ({ setActive }) => {
 	const {
-		register,
 		handleSubmit,
 		control,
+		reset,
 		formState: { errors },
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
 
-	const formSubmitHandler = (data) => console.log(data);
+	const dispatch = useDispatch();
+
+	const formSubmitHandler = (data) => {
+		console.log(data);
+		const newCocktail = {
+			id: uuidv4(),
+			...data,
+		};
+		dispatch(addCocktail(newCocktail));
+		setActive(false);
+	};
+
+	const ModalAddFormInput = ({ name, label }) => {
+		return (
+			<Controller
+				name={name}
+				control={control}
+				defaultValue=''
+				render={({ field }) => <TextField {...field} label={label} variant='outlined' color='primary' error={!!errors[name]} helperText={errors[name] && errors[name]?.message} margin='normal' sx={{ display: "block" }} fullWidth />}
+			/>
+		);
+	};
 
 	return (
-		<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form'>
-			<Controller
-				name='name'
-				control={control}
-				defaultValue=''
-				render={({ field }) => (
-					<TextField
-						{...field}
-						label='Cocktail name'
-						variant='outlined'
-						error={!!errors.name}
-						helperText={errors.name && errors.name?.message}
-						margin='dense'
-						sx={{ display: "block" }}
-						placeholder='Enter cocktail name...'
-						fullWidth
+		<ThemeProvider theme={theme}>
+			<div className='modal-add-form'>
+				<h2 className='modal-add-form__title'> Add Cocktail to list</h2>
+				<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form__form modal-form'>
+					<ModalAddFormInput name='name' label='Enter cocktail name' />
+					<ModalAddFormInput name='ingredients' label='Put ingredients' />
+					<ModalAddFormInput name='glass' label='Insert cocktail glass' />
+					<ModalAddFormInput name='imageUrl' label='Enter image URL' />
+
+					<Controller
+						name='method'
+						control={control}
+						defaultValue='build'
+						render={({ field }) => {
+							return (
+								<>
+									<FormLabel id='radio-group' sx={{ display: "block", textAlign: "center" }}>
+										Select method
+									</FormLabel>
+									<RadioGroup {...field} row aria-labelledby='radio-group' name='row-radio-buttons-group' sx={{ display: "block", textAlign: "center" }}>
+										<FormControlLabel value='build' control={<Radio />} label='Build' />
+										<FormControlLabel value='stir' control={<Radio />} label='Stir' />
+										<FormControlLabel value='shake' control={<Radio />} label='Shake' />
+										<FormControlLabel value='blend' control={<Radio />} label='Blend' />
+									</RadioGroup>
+								</>
+							);
+						}}
 					/>
-				)}
-			/>
-
-			<Controller
-				name='ingredients'
-				control={control}
-				defaultValue=''
-				render={({ field }) => (
-					<TextField
-						{...field}
-						label='Ingredients'
-						variant='outlined'
-						error={!!errors.ingredients}
-						helperText={errors.ingredients && errors.ingredients?.ingredients}
-						margin='dense'
-						sx={{ display: "block" }}
-						placeholder='Put ingredients here...'
-						fullWidth
-					/>
-				)}
-			/>
-
-			<Controller
-				name='method'
-				control={control}
-				render={({ field }) => {
-					return (
-						<>
-							<FormLabel id='radio-group'>Select method</FormLabel>
-							<RadioGroup {...field} row aria-labelledby='radio-group' name='row-radio-buttons-group'>
-								<FormControlLabel value='build' control={<Radio />} label='Build' />
-								<FormControlLabel value='stir' control={<Radio />} label='Stir' />
-								<FormControlLabel value='shake' control={<Radio />} label='Shake' />
-								<FormControlLabel value='blend' control={<Radio />} label='Blend' />
-							</RadioGroup>
-						</>
-					);
-				}}
-			/>
-
-			<Controller
-				name='imageUrl'
-				control={control}
-				defaultValue=''
-				render={({ field }) => (
-					<TextField
-						{...field}
-						label='Image Url'
-						variant='outlined'
-						error={!!errors.imageUrl}
-						helperText={errors.imageUrl && errors.imageUrl?.imageUrl}
-						margin='dense'
-						sx={{ display: "block" }}
-						placeholder='Enter image URL here...'
-						fullWidth
-					/>
-				)}
-			/>
-
-			<Button type='submit' fullWidth>
-				Submit
-			</Button>
-		</form>
+					<ButtonGroup variant='text' size='large' sx={{ margin: "20px 0" }} fullWidth>
+						<Button type='submit'>Submit</Button>
+						<Button onClick={() => reset()}>Reset</Button>
+					</ButtonGroup>
+				</form>
+			</div>
+		</ThemeProvider>
 	);
 };
 
