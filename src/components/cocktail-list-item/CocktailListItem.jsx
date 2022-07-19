@@ -1,6 +1,12 @@
+import { useDispatch } from "react-redux";
+
+import { showModalWindow } from "../../store/modalWindowSlice";
+
 import "./cocktailListItem.scss";
 
 const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageUrl } }) => {
+	const dispatch = useDispatch();
+
 	return (
 		<>
 			<div className='cocktail-list-item'>
@@ -10,7 +16,7 @@ const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageU
 				<div className='cocktail-list-item__description-block'>
 					<div className='cocktail-list-item__header'>
 						<h2 className='cocktail-list-item__title'>{name}</h2>
-						<button onClick={() => {}}>Preview</button>
+						<button onClick={() => dispatch(showModalWindow("preview"))}>Preview</button>
 					</div>
 					<p className='cocktail-list-item__description'>
 						<b>Ingredients:</b> {ingredients}

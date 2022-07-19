@@ -20,7 +20,7 @@ function App() {
 		<div className='App'>
 			<Header />
 			<MainBlock />
-			{modalState && <Modal>{typeOfModal === "form" ? <ModalAddForm /> : null}</Modal>}
+			{modalState && <Modal>{typeOfModal === "form" ? <ModalAddForm /> : <h2>Preview</h2>}</Modal>}
 		</div>
 	);
 }
