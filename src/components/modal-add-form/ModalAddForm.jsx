@@ -93,7 +93,7 @@ const ModalAddForm = () => {
 							);
 						}}
 					/>
-					<ButtonGroup variant='text' size='large' sx={{ margin: "20px 0" }} fullWidth>
+					<ButtonGroup variant='text' size='large' sx={{ margin: "20px 0 0 0" }} fullWidth>
 						<Button type='submit'>Submit</Button>
 						<Button onClick={() => reset()}>Reset</Button>
 					</ButtonGroup>

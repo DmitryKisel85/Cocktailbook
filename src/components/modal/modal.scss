@@ -29,8 +29,20 @@
 	flex-direction: column;
 	padding: 30px 40px;
 	gap: 20px;
-
 	background-image: $modalContentBackgroundGradient;
+
+	@media screen and (max-width: $tabletL) {
+		width: 60vw;
+	}
+
+	@media screen and (max-width: $tablet) {
+		width: 70vw;
+	}
+
+	@media screen and (max-width: $mobile) {
+		width: 85vw;
+		padding: 30px 20px 5px 20px;
+	}
 }
 
 .modal__content.active {

@@ -7,6 +7,10 @@
 	border-radius: 10px;
 	margin-bottom: 20px;
 
+	@media screen and (max-width: $mobile) {
+		grid-template-columns: 1fr 2fr;
+	}
+
 	&__img-block {
 		img {
 			width: 100%;
@@ -27,13 +31,21 @@
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
-	}
-
-	&__title {
+		align-items: center;
 		margin-bottom: 15px;
 	}
 
 	&__description {
 		margin-bottom: 10px;
 	}
+}
+
+.preview-button {
+	background-color: transparent;
+	border: 0;
+}
+
+.fa-search {
+	color: $textColor;
+	font-size: 20px;
 }

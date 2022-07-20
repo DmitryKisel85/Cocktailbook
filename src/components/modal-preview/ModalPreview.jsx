@@ -5,23 +5,22 @@ import { makeStyles } from "@mui/styles";
 
 import { modalWindowCocktailPreview } from "../../store/modalWindowSelector";
 
-import "./modalPreview.scss";
-
 const useStyles = makeStyles({
 	listTitle: {
-		fontSize: "32px",
 		textAlign: "center",
 		textTransform: "uppercase",
+		fontFamily: "Syne",
+		marginBottom: "30px",
 	},
 
 	listItem: {
-		padding: "15px 0",
+		padding: "20px 0",
 	},
 
 	listImageUrl: {
 		wordWrap: "break-word",
 		overflowX: "scroll",
-		padding: "15px 0",
+		padding: "20px 0",
 		fontSize: "16px",
 	},
 });
@@ -34,7 +33,7 @@ const ModalPreview = () => {
 
 	return (
 		<List>
-			<Typography gutterBottom className={classes.listTitle}>
+			<Typography component='h2' variant='h4' className={classes.listTitle}>
 				{name}
 			</Typography>
 			<Divider>
