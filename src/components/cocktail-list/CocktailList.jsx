@@ -15,7 +15,7 @@ const CocktailList = () => {
 	const dispatch = useDispatch();
 
 	const handleClick = () => {
-		dispatch(showModalWindow("form"));
+		dispatch(showModalWindow({ typeOfModalWindow: "form" }));
 	};
 
 	const cocktailListToRender = cocktails.map((cocktail) => {

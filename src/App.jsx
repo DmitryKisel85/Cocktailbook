@@ -6,6 +6,7 @@ import MainBlock from "./components/main-block";
 
 import Modal from "./components/modal";
 import ModalAddForm from "./components/modal-add-form";
+import ModalPreview from "./components/modal-preview";
 
 import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "./store/modalWindowSelector";
 
@@ -29,7 +30,12 @@ function App() {
 		<div className='App'>
 			<Header />
 			<MainBlock />
-			{modalState && <Modal>{typeOfModal === "form" ? <ModalAddForm /> : <h2>Preview</h2>}</Modal>}
+			{modalState && (
+				<Modal>
+					{typeOfModal === "form" ? <ModalAddForm /> : null}
+					{typeOfModal === "preview" ? <ModalPreview /> : null}
+				</Modal>
+			)}
 		</div>
 	);
 }

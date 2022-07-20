@@ -4,8 +4,10 @@ import { showModalWindow } from "../../store/modalWindowSlice";
 
 import "./cocktailListItem.scss";
 
-const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageUrl } }) => {
+const CocktailListItem = ({ cocktail }) => {
 	const dispatch = useDispatch();
+
+	const { name, ingredients, method, glass, imageUrl } = cocktail;
 
 	return (
 		<>
@@ -16,7 +18,7 @@ const CocktailListItem = ({ cocktail: { name, ingredients, method, glass, imageU
 				<div className='cocktail-list-item__description-block'>
 					<div className='cocktail-list-item__header'>
 						<h2 className='cocktail-list-item__title'>{name}</h2>
-						<button onClick={() => dispatch(showModalWindow("preview"))}>Preview</button>
+						<button onClick={() => dispatch(showModalWindow({ typeOfModalWindow: "preview", previewCocktail: cocktail }))}>Preview</button>
 					</div>
 					<p className='cocktail-list-item__description'>
 						<b>Ingredients:</b> {ingredients}
