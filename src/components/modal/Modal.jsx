@@ -12,8 +12,12 @@ const Modal = ({ children }) => {
 
 	const dispatch = useDispatch();
 
+	const handleModalClose = () => {
+		dispatch(hideModalWindow());
+	};
+
 	return (
-		<div className={modalState ? "modal active" : "modal"} onClick={() => dispatch(hideModalWindow())}>
+		<div className={modalState ? "modal active" : "modal"} onClick={handleModalClose}>
 			<div className={modalState ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
 				{children}
 			</div>

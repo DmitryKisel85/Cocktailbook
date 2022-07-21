@@ -11,7 +11,7 @@ import { makeStyles } from "@mui/styles";
 import { hideModalWindow } from "../../store/modalWindowSlice";
 import { addCocktail } from "../../store/cocktailSlice";
 
-// устанавливаем цвет нашей формы как 'primary'
+// устанавливаем базовые настройки Material UI
 const theme = createTheme({
 	palette: {
 		primary: {
@@ -31,6 +31,7 @@ const theme = createTheme({
 	},
 });
 
+// создаем стили для компонентов MUI
 const useStyles = makeStyles({
 	container: {
 		position: "relative",
@@ -83,7 +84,7 @@ const useStyles = makeStyles({
 	},
 });
 
-// проверка элементов формы на валидность
+// устанавливаем валидацию элементов формы
 const schema = yup.object().shape({
 	name: yup.string().min(2).required(),
 	ingredients: yup.string().min(2).required(),

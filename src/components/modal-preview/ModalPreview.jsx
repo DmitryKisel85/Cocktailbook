@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { modalWindowCocktailPreview } from "../../store/modalWindowSelector";
 import { hideModalWindow } from "../../store/modalWindowSlice";
 
+// устанавливаем базовые настройки Material UI
 const theme = createTheme({
 	palette: {
 		primary: {
@@ -26,6 +27,7 @@ const theme = createTheme({
 	},
 });
 
+// создаем стили для компонентов MUI
 const useStyles = makeStyles({
 	container: {
 		position: "relative",
