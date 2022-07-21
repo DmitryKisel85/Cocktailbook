@@ -94,6 +94,8 @@ const schema = yup.object().shape({
 });
 
 const ModalAddForm = () => {
+	console.log("modalAddForm");
+
 	const {
 		handleSubmit,
 		control,
@@ -122,6 +124,7 @@ const ModalAddForm = () => {
 	};
 
 	const ModalAddFormInput = ({ name, label }) => {
+		console.log("modalAddFormInput");
 		return (
 			<Controller
 				name={name}

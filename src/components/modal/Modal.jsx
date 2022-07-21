@@ -8,7 +8,6 @@ import "./modal.scss";
 
 const Modal = ({ children }) => {
 	const modalState = useSelector(modalWindowIsOpenSelector);
-	console.log(modalState);
 
 	const dispatch = useDispatch();
 

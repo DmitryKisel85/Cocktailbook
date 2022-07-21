@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 
 import { cocktailsSelector } from "../../store/cocktailSelector";
@@ -31,4 +33,4 @@ const CocktailList = () => {
 	);
 };
 
-export default CocktailList;
+export default memo(CocktailList);
