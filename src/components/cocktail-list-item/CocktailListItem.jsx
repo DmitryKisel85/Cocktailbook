@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { useDispatch } from "react-redux";
 
 import { showModalWindow } from "../../store/modalWindowSlice";
@@ -38,6 +40,10 @@ const CocktailListItem = ({ cocktail }) => {
 			</div>
 		</>
 	);
+};
+
+CocktailListItem.propTypes = {
+	cocktail: PropTypes.object,
 };
 
 export default CocktailListItem;

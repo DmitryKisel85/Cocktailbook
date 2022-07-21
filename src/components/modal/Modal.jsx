@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { useSelector, useDispatch } from "react-redux";
 
 import { modalWindowIsOpenSelector } from "../../store/modalWindowSelector";
@@ -22,6 +24,10 @@ const Modal = ({ children }) => {
 			</div>
 		</div>
 	);
+};
+
+Modal.propTypes = {
+	children: PropTypes.node,
 };
 
 export default Modal;

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -94,8 +96,6 @@ const schema = yup.object().shape({
 });
 
 const ModalAddForm = () => {
-	console.log("modalAddForm");
-
 	const {
 		handleSubmit,
 		control,
@@ -124,7 +124,6 @@ const ModalAddForm = () => {
 	};
 
 	const ModalAddFormInput = ({ name, label }) => {
-		console.log("modalAddFormInput");
 		return (
 			<Controller
 				name={name}
@@ -133,6 +132,11 @@ const ModalAddForm = () => {
 				render={({ field }) => <TextField {...field} label={label} variant='outlined' error={!!errors[name]} helperText={errors[name] && errors[name]?.message} className={classes.textField} fullWidth />}
 			/>
 		);
+	};
+
+	ModalAddFormInput.propTypes = {
+		name: PropTypes.string,
+		label: PropTypes.string,
 	};
 
 	return (
