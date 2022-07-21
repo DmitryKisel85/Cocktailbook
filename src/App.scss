@@ -28,12 +28,12 @@ body {
 	color: $textColor;
 	background-image: $mainAppGradient;
 
-	@media screen and (max-width: $tablet) {
+	@media screen and (max-width: $tabletS) {
 		max-width: 600px;
 		padding: 30px 30px;
 	}
 
-	@media screen and (max-width: $mobile) {
+	@media screen and (max-width: $mobileL) {
 		padding: 30px 15px;
 	}
 }

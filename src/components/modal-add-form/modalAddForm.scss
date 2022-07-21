@@ -1,12 +1,4 @@
 @import "../../styles/variables.scss";
 
 .modal-add-form {
-	@media screen and (max-width: $tablet) {
-	}
-
-	&__title {
-		text-align: center;
-		text-transform: uppercase;
-		margin-bottom: 20px;
-	}
 }

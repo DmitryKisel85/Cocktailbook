@@ -4,8 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
-import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup } from "@mui/material";
+import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup, Typography, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 import { hideModalWindow } from "../../store/modalWindowSlice";
 import { addCocktail } from "../../store/cocktailSlice";
@@ -17,6 +18,65 @@ const theme = createTheme({
 	palette: {
 		primary: {
 			main: "#40312a",
+		},
+	},
+	typography: {
+		fontFamily: "Syne",
+		fontSize: 16,
+	},
+	breakpoints: {
+		values: {
+			tabletS: 768,
+			mobile: 525,
+			mobileS: 360,
+		},
+	},
+});
+
+const useStyles = makeStyles({
+	container: {
+		position: "relative",
+	},
+	textField: {
+		display: "block",
+		marginBottom: "20px",
+	},
+	formLabel: {
+		display: "block",
+		textAlign: "center",
+	},
+	radioGroup: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "center",
+		textAlign: "center",
+		[theme.breakpoints.down("mobile")]: {
+			display: "grid",
+		},
+	},
+	buttonGroup: {
+		margin: "20px 0 0 0",
+	},
+	button: {
+		fontWeight: "bold",
+		fontSize: 16,
+	},
+	closeButton: {
+		position: "absolute",
+		right: "-45px",
+		top: "-35px",
+		fontSize: 32,
+	},
+	title: {
+		textTransform: "uppercase",
+		[theme.breakpoints.down("tabletS")]: {
+			fontSize: 28,
+		},
+		[theme.breakpoints.down("mobile")]: {
+			fontSize: 24,
+		},
+		[theme.breakpoints.down("mobileS")]: {
+			fontSize: 20,
 		},
 	},
 });
@@ -41,6 +101,7 @@ const ModalAddForm = () => {
 	});
 
 	const dispatch = useDispatch();
+	const classes = useStyles();
 
 	const formSubmitHandler = (data) => {
 		const newCocktail = {
@@ -52,21 +113,28 @@ const ModalAddForm = () => {
 		dispatch(hideModalWindow());
 	};
 
+	const closeButtonHandler = () => {
+		reset();
+		dispatch(hideModalWindow());
+	};
+
 	const ModalAddFormInput = ({ name, label }) => {
 		return (
 			<Controller
 				name={name}
 				control={control}
 				defaultValue=''
-				render={({ field }) => <TextField {...field} label={label} variant='outlined' color='primary' error={!!errors[name]} helperText={errors[name] && errors[name]?.message} margin='normal' sx={{ display: "block" }} fullWidth />}
+				render={({ field }) => <TextField {...field} label={label} variant='outlined' error={!!errors[name]} helperText={errors[name] && errors[name]?.message} className={classes.textField} fullWidth />}
 			/>
 		);
 	};
 
 	return (
 		<ThemeProvider theme={theme}>
-			<div className='modal-add-form'>
-				<h2 className='modal-add-form__title'> Add Cocktail to list</h2>
+			<Container className={classes.container} disableGutters>
+				<Typography component='h1' variant='h5' gutterBottom align='center' className={classes.title}>
+					Add Cocktail to list
+				</Typography>
 				<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form__form modal-form'>
 					<ModalAddFormInput name='name' label='Enter cocktail name' />
 					<ModalAddFormInput name='ingredients' label='Put ingredients' />
@@ -80,10 +148,10 @@ const ModalAddForm = () => {
 						render={({ field }) => {
 							return (
 								<>
-									<FormLabel id='radio-group' sx={{ display: "block", textAlign: "center" }}>
+									<FormLabel id='radio-group' className={classes.formLabel}>
 										Select method
 									</FormLabel>
-									<RadioGroup {...field} row aria-labelledby='radio-group' name='row-radio-buttons-group' sx={{ display: "block", textAlign: "center" }}>
+									<RadioGroup {...field} aria-labelledby='radio-group' name='row-radio-buttons-group' className={classes.radioGroup}>
 										<FormControlLabel value='build' control={<Radio />} label='Build' />
 										<FormControlLabel value='stir' control={<Radio />} label='Stir' />
 										<FormControlLabel value='shake' control={<Radio />} label='Shake' />
@@ -93,12 +161,19 @@ const ModalAddForm = () => {
 							);
 						}}
 					/>
-					<ButtonGroup variant='text' size='large' sx={{ margin: "20px 0 0 0" }} fullWidth>
-						<Button type='submit'>Submit</Button>
-						<Button onClick={() => reset()}>Reset</Button>
+					<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
+						<Button type='submit' className={classes.button}>
+							Submit
+						</Button>
+						<Button className={classes.button} onClick={() => reset()}>
+							Reset
+						</Button>
 					</ButtonGroup>
 				</form>
-			</div>
+				<Button className={classes.closeButton} onClick={closeButtonHandler}>
+					&times;
+				</Button>
+			</Container>
 		</ThemeProvider>
 	);
 };

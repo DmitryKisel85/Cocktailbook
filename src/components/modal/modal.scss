@@ -35,11 +35,11 @@
 		width: 60vw;
 	}
 
-	@media screen and (max-width: $tablet) {
-		width: 70vw;
+	@media screen and (max-width: $tabletS) {
+		width: 75vw;
 	}
 
-	@media screen and (max-width: $mobile) {
+	@media screen and (max-width: $mobileL) {
 		width: 85vw;
 		padding: 30px 20px 5px 20px;
 	}

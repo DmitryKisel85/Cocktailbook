@@ -7,7 +7,7 @@
 	border-radius: 10px;
 	margin-bottom: 20px;
 
-	@media screen and (max-width: $mobile) {
+	@media screen and (max-width: $mobileL) {
 		grid-template-columns: 1fr 2fr;
 	}
 
