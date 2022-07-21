@@ -11,8 +11,6 @@ import { makeStyles } from "@mui/styles";
 import { hideModalWindow } from "../../store/modalWindowSlice";
 import { addCocktail } from "../../store/cocktailSlice";
 
-import "./modalAddForm.scss";
-
 // устанавливаем цвет нашей формы как 'primary'
 const theme = createTheme({
 	palette: {
@@ -27,7 +25,7 @@ const theme = createTheme({
 	breakpoints: {
 		values: {
 			tabletS: 768,
-			mobile: 525,
+			mobileL: 525,
 			mobileS: 360,
 		},
 	},
@@ -50,7 +48,7 @@ const useStyles = makeStyles({
 		flexDirection: "row",
 		justifyContent: "center",
 		textAlign: "center",
-		[theme.breakpoints.down("mobile")]: {
+		[theme.breakpoints.down("mobileL")]: {
 			display: "grid",
 		},
 	},
@@ -66,13 +64,17 @@ const useStyles = makeStyles({
 		right: "-45px",
 		top: "-35px",
 		fontSize: 32,
+		[theme.breakpoints.down("mobileL")]: {
+			right: "-25px",
+			top: "-45px",
+		},
 	},
 	title: {
 		textTransform: "uppercase",
 		[theme.breakpoints.down("tabletS")]: {
 			fontSize: 28,
 		},
-		[theme.breakpoints.down("mobile")]: {
+		[theme.breakpoints.down("mobileL")]: {
 			fontSize: 24,
 		},
 		[theme.breakpoints.down("mobileS")]: {
