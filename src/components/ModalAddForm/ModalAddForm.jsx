@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 	textField: {
 		display: "block",
 		position: "relative",
-		paddingBottom: "35px",
+		paddingBottom: "30px",
 	},
 	formLabel: {
 		display: "block",
@@ -78,7 +78,7 @@ const useStyles = makeStyles({
 	},
 	helperText: {
 		position: "absolute",
-		bottom: "1em",
+		bottom: "10px",
 		color: "#d32f2f",
 	},
 
