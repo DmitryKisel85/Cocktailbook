@@ -8,7 +8,7 @@ import { showModalWindow } from "../../store/modalWindowSlice";
 
 import CocktailListItem from "../CocktailListItem";
 
-import "./cocktailList.scss";
+import styles from "./cocktailList.module.scss";
 
 const CocktailList = () => {
 	const cocktails = useSelector(cocktailsSelector);
@@ -24,9 +24,9 @@ const CocktailList = () => {
 	});
 
 	return (
-		<ul className='cocktail-list'>
+		<ul className={styles.cocktailList}>
 			{cocktailListToRender}
-			<button className='addButton' onClick={handleClick}>
+			<button className={styles.addButton} onClick={handleClick}>
 				Add cocktail
 			</button>
 		</ul>

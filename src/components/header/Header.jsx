@@ -1,10 +1,10 @@
 import { memo } from "react";
 
-import "./header.scss";
+import styles from "./header.module.scss";
 
 const Header = () => {
 	return (
-		<header className='header'>
+		<header className={styles.header}>
 			<h1>Personal Cocktail Book</h1>
 		</header>
 	);

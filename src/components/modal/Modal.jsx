@@ -8,7 +8,7 @@ import { modalWindowIsOpenSelector } from "../../store/modalWindowSelector";
 
 import { hideModalWindow } from "../../store/modalWindowSlice";
 
-import "./modal.scss";
+import styles from "./modal.module.scss";
 
 const Modal = ({ children }) => {
 	const modalState = useSelector(modalWindowIsOpenSelector);
@@ -19,13 +19,11 @@ const Modal = ({ children }) => {
 		dispatch(hideModalWindow());
 	};
 
-	const modalActive = classNames("modal", { active: modalState });
-	const modalContentActive = classNames("modal__content", { active: modalState });
+	const modalActive = classNames(styles.modal, { [styles.active]: modalState });
 
 	return (
 		<div className={modalActive} onClick={handleModalClose}>
-			{/* <div className={modalState ? "modal active" : "modal"} onClick={handleModalClose}> */}
-			<div className={modalContentActive} onClick={(e) => e.stopPropagation()}>
+			<div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
 				{children}
 			</div>
 		</div>

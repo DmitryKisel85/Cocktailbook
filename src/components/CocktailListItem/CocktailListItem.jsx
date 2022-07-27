@@ -4,41 +4,39 @@ import { useDispatch } from "react-redux";
 
 import { showModalWindow } from "../../store/modalWindowSlice";
 
-import "./cocktailListItem.scss";
+import styles from "./cocktailListItem.module.scss";
 
 const CocktailListItem = ({ cocktail }) => {
 	const dispatch = useDispatch();
 	const { name, ingredients, method, glass, imageUrl } = cocktail;
 
-	const handleClick = () => {
+	const handleShowModal = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "preview", previewCocktail: cocktail }));
 	};
 
 	return (
-		<>
-			<div className='cocktail-list-item'>
-				<div className='cocktail-list-item__img-block'>
-					<img className='cocktail-list-item__img' src={imageUrl} alt='cocktail' />
-				</div>
-				<div className='cocktail-list-item__description-block'>
-					<div className='cocktail-list-item__header'>
-						<h2 className='cocktail-list-item__title'>{name}</h2>
-						<button className='preview-button' onClick={handleClick}>
-							<i className='fas fa-search'></i>
-						</button>
-					</div>
-					<p className='cocktail-list-item__description'>
-						<b>Ingredients:</b> {ingredients}
-					</p>
-					<p className='cocktail-list-item__description'>
-						<b>Method:</b> {method}
-					</p>
-					<p className='cocktail-list-item__description'>
-						<b>Glass:</b> {glass}
-					</p>
-				</div>
+		<div className={styles.cocktailListItem}>
+			<div className={styles.imgBlock}>
+				<img className={styles.img} src={imageUrl} alt='cocktail' />
 			</div>
-		</>
+			<div className={styles.descriptionBlock}>
+				<div className={styles.descriptionHeader}>
+					<h2>{name}</h2>
+					<button className={styles.previewButton} onClick={handleShowModal}>
+						<i className={`${styles.previewIcon} fas fa-search`}></i>
+					</button>
+				</div>
+				<p className={styles.description}>
+					<b>Ingredients:</b> {ingredients}
+				</p>
+				<p className={styles.description}>
+					<b>Method:</b> {method}
+				</p>
+				<p className={styles.description}>
+					<b>Glass:</b> {glass}
+				</p>
+			</div>
+		</div>
 	);
 };
 
