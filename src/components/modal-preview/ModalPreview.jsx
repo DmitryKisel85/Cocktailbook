@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { Divider, Chip, List, ListItem, Typography, Container, Button } from "@mui/material";
+import { Divider, Chip, List, ListItem, Typography, Container, Button, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -25,6 +25,9 @@ const theme = createTheme({
 			mobileS: 360,
 		},
 	},
+	MuiButton: {
+		fontSize: 32,
+	},
 });
 
 // создаем стили для компонентов MUI
@@ -42,15 +45,19 @@ const useStyles = makeStyles({
 	listItem: {
 		padding: "20px 0",
 	},
-
-	listImageUrl: {
-		wordWrap: "break-word",
-		overflowX: "scroll",
-		padding: "20px 0",
-		fontSize: 16,
+	listImageBox: {
+		width: "350px",
+		height: "350px",
+		margin: "0 auto 20px auto",
 	},
+	listImage: {
+		width: "100%",
+		height: "100%",
+		objectFit: "cover",
+	},
+
 	closeButton: {
-		position: "absolute",
+		position: "absolute !important",
 		right: "-45px",
 		top: "-35px",
 		fontSize: 32,
@@ -75,6 +82,9 @@ const ModalPreview = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<Container className={classes.container} disableGutters>
+				<Box className={classes.listImageBox}>
+					<img id={name} src={imageUrl} className={classes.listImage} alt={name} />
+				</Box>
 				<List>
 					<Typography component='h2' variant='h4' className={classes.listTitle}>
 						{name}
@@ -91,10 +101,6 @@ const ModalPreview = () => {
 						<Chip label='GLASS' />
 					</Divider>
 					<ListItem className={classes.listItem}>{glass}</ListItem>
-					<Divider>
-						<Chip label='IMAGE URL' />
-					</Divider>
-					<ListItem className={classes.listImageUrl}>{imageUrl}</ListItem>
 				</List>
 				<Button className={classes.closeButton} onClick={closeButtonHandler}>
 					&times;

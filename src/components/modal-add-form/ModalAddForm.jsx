@@ -6,12 +6,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
-import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup, Typography, Container } from "@mui/material";
+import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup, Typography, Container, FormHelperText } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
 import { hideModalWindow } from "../../store/modalWindowSlice";
 import { addCocktail } from "../../store/cocktailSlice";
+
+import { testImage } from "../../services/yupImageValidation";
 
 // устанавливаем базовые настройки Material UI
 const theme = createTheme({
@@ -20,6 +22,7 @@ const theme = createTheme({
 			main: "#40312a",
 		},
 	},
+
 	typography: {
 		fontFamily: "Syne",
 		fontSize: 16,
@@ -40,7 +43,8 @@ const useStyles = makeStyles({
 	},
 	textField: {
 		display: "block",
-		marginBottom: "20px",
+		position: "relative",
+		paddingBottom: "35px",
 	},
 	formLabel: {
 		display: "block",
@@ -72,6 +76,12 @@ const useStyles = makeStyles({
 			top: "-45px",
 		},
 	},
+	helperText: {
+		position: "absolute",
+		bottom: "1em",
+		color: "#d32f2f",
+	},
+
 	title: {
 		textTransform: "uppercase",
 		[theme.breakpoints.down("tabletS")]: {
@@ -92,7 +102,8 @@ const schema = yup.object().shape({
 	ingredients: yup.string().min(2).required(),
 	method: yup.string(),
 	glass: yup.string().min(2).required(),
-	imageUrl: yup.string(),
+	// imageUrl: yup.string(),
+	imageUrl: yup.string().test("valid-image-url", "Must use valid image URL or leave input field empty", (value) => testImage(value, 1000).then((status) => status === "success")),
 });
 
 const ModalAddForm = () => {
@@ -109,6 +120,10 @@ const ModalAddForm = () => {
 	const classes = useStyles();
 
 	const formSubmitHandler = (data) => {
+		if (data.imageUrl === "") {
+			data.imageUrl = "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png";
+		}
+
 		const newCocktail = {
 			id: uuidv4(),
 			...data,
@@ -129,7 +144,16 @@ const ModalAddForm = () => {
 				name={name}
 				control={control}
 				defaultValue=''
-				render={({ field }) => <TextField {...field} label={label} variant='outlined' error={!!errors[name]} helperText={errors[name] && errors[name]?.message} className={classes.textField} fullWidth />}
+				render={({ field }) => (
+					<div style={{ position: "relative" }}>
+						<TextField {...field} label={label} variant='outlined' error={!!errors[name]} className={classes.textField} fullWidth />
+						<FormHelperText className={classes.helperText}>{errors ? errors[name]?.message : ""}</FormHelperText>
+					</div>
+					// <>
+					// 	<TextField {...field} label={label} variant='outlined' error={!!errors[name]} helperText={errors[name] && errors[name]?.message} className={classes.textField} FormHelperTextProps={classes.helperText} fullWidth />
+					// 	<FormHelperText className={classes.helperText}>{errors[name] && errors[name]?.message}</FormHelperText>
+					// </>
+				)}
 			/>
 		);
 	};

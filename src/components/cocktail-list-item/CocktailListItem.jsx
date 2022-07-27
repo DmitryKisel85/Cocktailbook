@@ -9,6 +9,7 @@ import "./cocktailListItem.scss";
 const CocktailListItem = ({ cocktail }) => {
 	const dispatch = useDispatch();
 	const { name, ingredients, method, glass, imageUrl } = cocktail;
+	console.log(imageUrl);
 
 	const handleClick = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "preview", previewCocktail: cocktail }));
@@ -18,7 +19,7 @@ const CocktailListItem = ({ cocktail }) => {
 		<>
 			<div className='cocktail-list-item'>
 				<div className='cocktail-list-item__img-block'>
-					<img src={imageUrl || "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png"} alt='cocktail' />
+					<img className='cocktail-list-item__img' src={imageUrl} alt='cocktail' />
 				</div>
 				<div className='cocktail-list-item__description-block'>
 					<div className='cocktail-list-item__header'>

@@ -11,6 +11,11 @@
 		grid-template-columns: 1fr 2fr;
 	}
 
+	&__img {
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+	}
+
 	&__img-block {
 		img {
 			width: 100%;

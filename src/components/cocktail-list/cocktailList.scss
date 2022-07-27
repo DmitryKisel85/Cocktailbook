@@ -17,6 +17,7 @@
 	color: $textColor;
 	background-color: transparent;
 	border: 1px solid $textColor;
+	cursor: pointer;
 
 	&:hover {
 		background-image: $addButtonGradient;
