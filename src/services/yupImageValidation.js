@@ -1,3 +1,4 @@
+// проверка на валидность ссылки на изображение
 export const testImage = (url, timeout) =>
 	new Promise((res) => {
 		timeout = timeout || 5000;

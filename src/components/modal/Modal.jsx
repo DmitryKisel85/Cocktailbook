@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import classNames from "classnames";
+
 import { modalWindowIsOpenSelector } from "../../store/modalWindowSelector";
 
 import { hideModalWindow } from "../../store/modalWindowSlice";
@@ -17,9 +19,13 @@ const Modal = ({ children }) => {
 		dispatch(hideModalWindow());
 	};
 
+	const modalActive = classNames("modal", { active: modalState });
+	const modalContentActive = classNames("modal__content", { active: modalState });
+
 	return (
-		<div className={modalState ? "modal active" : "modal"} onClick={handleModalClose}>
-			<div className={modalState ? "modal__content active" : "modal__content"} onClick={(e) => e.stopPropagation()}>
+		<div className={modalActive} onClick={handleModalClose}>
+			{/* <div className={modalState ? "modal active" : "modal"} onClick={handleModalClose}> */}
+			<div className={modalContentActive} onClick={(e) => e.stopPropagation()}>
 				{children}
 			</div>
 		</div>

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import Header from "./components/header";
-import CocktailList from "./components/cocktail-list";
+import Header from "./components/Header";
+import CocktailList from "./components/CocktailList";
 
-import Modal from "./components/modal";
-import ModalAddForm from "./components/modal-add-form";
-import ModalPreview from "./components/modal-preview";
+import Modal from "./components/Modal";
+import ModalAddForm from "./components/ModalAddForm";
+import ModalPreview from "./components/ModalPreview";
 
 import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "./store/modalWindowSelector";
 

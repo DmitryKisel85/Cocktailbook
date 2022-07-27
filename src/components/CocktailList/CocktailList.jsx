@@ -6,7 +6,7 @@ import { cocktailsSelector } from "../../store/cocktailSelector";
 
 import { showModalWindow } from "../../store/modalWindowSlice";
 
-import CocktailListItem from "../cocktail-list-item/";
+import CocktailListItem from "../CocktailListItem";
 
 import "./cocktailList.scss";
 

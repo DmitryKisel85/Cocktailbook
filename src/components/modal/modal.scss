@@ -12,7 +12,6 @@
 	align-items: center;
 	opacity: 0;
 	pointer-events: none;
-	transition: all 0.3s;
 }
 
 .modal.active {
@@ -24,8 +23,6 @@
 	margin-right: 17px;
 	width: 35vw;
 	border-radius: 12px;
-	transform: scale(0.5);
-	transition: all 0.3s;
 	display: flex;
 	flex-direction: column;
 	padding: 30px 40px;
@@ -44,8 +41,4 @@
 		width: 85vw;
 		padding: 30px 20px 5px 20px;
 	}
-}
-
-.modal__content.active {
-	transform: scale(1);
 }
