@@ -10,8 +10,8 @@ import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, Butt
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
-import { hideModalWindow } from "../../store/modalWindowSlice";
-import { addCocktail } from "../../store/cocktailSlice";
+import { hideModalWindow } from "../../store/modal/modalWindowSlice";
+import { addCocktail } from "../../store/cocktail/cocktailSlice";
 
 import { testImage } from "../../services/yupImageValidation";
 
@@ -102,7 +102,6 @@ const schema = yup.object().shape({
 	ingredients: yup.string().min(2).required(),
 	method: yup.string(),
 	glass: yup.string().min(2).required(),
-	// imageUrl: yup.string(),
 	imageUrl: yup.string().test("valid-image-url", "Must use valid image URL or leave input field empty", (value) => testImage(value, 1000).then((status) => status === "success")),
 });
 
@@ -149,10 +148,6 @@ const ModalAddForm = () => {
 						<TextField {...field} label={label} variant='outlined' error={!!errors[name]} className={classes.textField} fullWidth />
 						<FormHelperText className={classes.helperText}>{errors ? errors[name]?.message : ""}</FormHelperText>
 					</div>
-					// <>
-					// 	<TextField {...field} label={label} variant='outlined' error={!!errors[name]} helperText={errors[name] && errors[name]?.message} className={classes.textField} FormHelperTextProps={classes.helperText} fullWidth />
-					// 	<FormHelperText className={classes.helperText}>{errors[name] && errors[name]?.message}</FormHelperText>
-					// </>
 				)}
 			/>
 		);

@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import classNames from "classnames";
 
-import { modalWindowIsOpenSelector } from "../../store/modalWindowSelector";
+import { modalWindowIsOpenSelector } from "../../store/modal/modalWindowSelector";
 
-import { hideModalWindow } from "../../store/modalWindowSlice";
+import { hideModalWindow } from "../../store/modal/modalWindowSlice";
 
 import styles from "./modal.module.scss";
 
@@ -31,7 +31,7 @@ const Modal = ({ children }) => {
 };
 
 Modal.propTypes = {
-	children: PropTypes.node,
+	children: PropTypes.node.isRequired,
 };
 
 export default Modal;

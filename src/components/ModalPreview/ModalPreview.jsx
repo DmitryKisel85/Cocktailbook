@@ -4,8 +4,8 @@ import { Divider, Chip, List, ListItem, Typography, Container, Button, Box } fro
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { modalWindowCocktailPreview } from "../../store/modalWindowSelector";
-import { hideModalWindow } from "../../store/modalWindowSlice";
+import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
+import { hideModalWindow } from "../../store/modal/modalWindowSlice";
 
 // устанавливаем базовые настройки Material UI
 const theme = createTheme({
@@ -75,7 +75,7 @@ const ModalPreview = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
-	const closeButtonHandler = () => {
+	const closeModalHandler = () => {
 		dispatch(hideModalWindow());
 	};
 
@@ -102,7 +102,7 @@ const ModalPreview = () => {
 					</Divider>
 					<ListItem className={classes.listItem}>{glass}</ListItem>
 				</List>
-				<Button className={classes.closeButton} onClick={closeButtonHandler}>
+				<Button className={classes.closeButton} onClick={closeModalHandler}>
 					&times;
 				</Button>
 			</Container>

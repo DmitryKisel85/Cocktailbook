@@ -4,7 +4,7 @@ import styles from "./header.module.scss";
 
 const Header = () => {
 	return (
-		<header className={styles.header}>
+		<header className={styles.root}>
 			<h1>Personal Cocktail Book</h1>
 		</header>
 	);

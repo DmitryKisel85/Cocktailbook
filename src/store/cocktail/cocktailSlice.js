@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	cocktails: [
 		{
-			id: 1,
+			id: "1",
 			name: "Daiquiri",
 			ingredients: "rum 60ml, lime juice 20ml, superfine sugar 2 spoons",
 			method: "shake",
@@ -11,7 +11,7 @@ const initialState = {
 			imageUrl: "https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg",
 		},
 		{
-			id: 2,
+			id: "2",
 			name: "Negroni",
 			ingredients: "gin 30ml, campari 30ml, sweet red vermouth 30ml",
 			method: "build",
@@ -19,7 +19,7 @@ const initialState = {
 			imageUrl: "https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg",
 		},
 		{
-			id: 3,
+			id: "3",
 			name: "Manhattan",
 			ingredients: "rye whiskey 50ml, sweet red vermouth 20ml, Angostura bitters 1 dash",
 			method: "stir",

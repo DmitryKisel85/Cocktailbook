@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import { useDispatch } from "react-redux";
 
-import { showModalWindow } from "../../store/modalWindowSlice";
+import { showModalWindow } from "../../store/modal/modalWindowSlice";
 
 import styles from "./cocktailListItem.module.scss";
 
@@ -10,19 +10,19 @@ const CocktailListItem = ({ cocktail }) => {
 	const dispatch = useDispatch();
 	const { name, ingredients, method, glass, imageUrl } = cocktail;
 
-	const handleShowModal = () => {
+	const handleShowPreviewModal = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "preview", previewCocktail: cocktail }));
 	};
 
 	return (
-		<div className={styles.cocktailListItem}>
+		<div className={styles.root}>
 			<div className={styles.imgBlock}>
 				<img className={styles.img} src={imageUrl} alt='cocktail' />
 			</div>
 			<div className={styles.descriptionBlock}>
 				<div className={styles.descriptionHeader}>
 					<h2>{name}</h2>
-					<button className={styles.previewButton} onClick={handleShowModal}>
+					<button className={styles.previewButton} onClick={handleShowPreviewModal}>
 						<i className={`${styles.previewIcon} fas fa-search`}></i>
 					</button>
 				</div>
@@ -41,7 +41,14 @@ const CocktailListItem = ({ cocktail }) => {
 };
 
 CocktailListItem.propTypes = {
-	cocktail: PropTypes.object,
+	cocktail: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		ingredients: PropTypes.string.isRequired,
+		method: PropTypes.string.isRequired,
+		glass: PropTypes.string.isRequired,
+		imageUrl: PropTypes.string,
+	}),
 };
 
 export default CocktailListItem;

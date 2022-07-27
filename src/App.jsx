@@ -8,7 +8,7 @@ import Modal from "./components/Modal";
 import ModalAddForm from "./components/ModalAddForm";
 import ModalPreview from "./components/ModalPreview";
 
-import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "./store/modalWindowSelector";
+import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "./store/modal/modalWindowSelector";
 
 import { useScrollLock } from "./hooks/useScrollLock";
 

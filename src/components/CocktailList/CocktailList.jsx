@@ -2,9 +2,9 @@ import { memo } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { cocktailsSelector } from "../../store/cocktailSelector";
+import { cocktailsSelector } from "../../store/cocktail/cocktailSelector";
 
-import { showModalWindow } from "../../store/modalWindowSlice";
+import { showModalWindow } from "../../store/modal/modalWindowSlice";
 
 import CocktailListItem from "../CocktailListItem";
 
@@ -15,7 +15,7 @@ const CocktailList = () => {
 
 	const dispatch = useDispatch();
 
-	const handleClick = () => {
+	const handleShowForm = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "form" }));
 	};
 
@@ -24,9 +24,9 @@ const CocktailList = () => {
 	});
 
 	return (
-		<ul className={styles.cocktailList}>
+		<ul className={styles.root}>
 			{cocktailListToRender}
-			<button className={styles.addButton} onClick={handleClick}>
+			<button className={styles.addButton} onClick={handleShowForm}>
 				Add cocktail
 			</button>
 		</ul>
