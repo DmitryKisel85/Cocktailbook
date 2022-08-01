@@ -41,6 +41,7 @@ ModalAddFormInput.propTypes = {
 	label: PropTypes.string.isRequired,
 	control: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
+	defaultValue: PropTypes.string,
 };
 
 export default ModalAddFormInput;
