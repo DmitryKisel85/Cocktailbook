@@ -1,11 +1,13 @@
-import "./header.scss";
+import { memo } from "react";
+
+import styles from "./header.module.scss";
 
 const Header = () => {
 	return (
-		<header className='header'>
-			<h1>Cocktail Book</h1>
+		<header className={styles.root}>
+			<h1>Personal Cocktail Book</h1>
 		</header>
 	);
 };
 
-export default Header;
+export default memo(Header);

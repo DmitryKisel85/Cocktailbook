@@ -1,0 +1,44 @@
+@import "../../styles/variables.scss";
+
+.modal {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.modal.active {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.modalContent {
+	margin-right: 17px;
+	width: 35vw;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	padding: 30px 40px;
+	gap: 20px;
+	background-image: $modalContentBackgroundGradient;
+
+	@media screen and (max-width: $tabletL) {
+		width: 60vw;
+	}
+
+	@media screen and (max-width: $tabletS) {
+		width: 75vw;
+	}
+
+	@media screen and (max-width: $mobileL) {
+		width: 85vw;
+		padding: 30px 20px 5px 20px;
+	}
+}

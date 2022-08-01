@@ -1,0 +1,63 @@
+@import "../../styles/variables.scss";
+
+.root {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	border: 1px solid $textColor;
+	border-radius: 10px;
+	margin-bottom: 20px;
+
+	@media screen and (max-width: $mobileL) {
+		grid-template-columns: 1fr 2fr;
+	}
+}
+
+.img {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.imgBlock {
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+.descriptionBlock {
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.descriptionHeader {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.description {
+	margin-bottom: 10px;
+}
+
+.previewButton {
+	background-color: transparent;
+	border: 0;
+	cursor: pointer;
+	transform: scale(1);
+	transition: transform 0.2s;
+
+	&:hover {
+		transform: scale(1.2);
+	}
+}
+
+.previewIcon {
+	color: $textColor;
+	font-size: 20px;
+}
