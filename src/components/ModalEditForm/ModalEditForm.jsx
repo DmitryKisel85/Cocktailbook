@@ -65,13 +65,13 @@ const useStyles = makeStyles({
 	},
 	button: {
 		fontWeight: "bold!important",
-		fontSize: 16,
+		fontSize: [16, "!important"],
 	},
 	closeButton: {
 		position: "absolute!important",
 		right: "-45px!important",
 		top: "-35px!important",
-		fontSize: 32,
+		fontSize: [32, "!important"],
 		[theme.breakpoints.down("mobileL")]: {
 			right: "-25px!important",
 			top: "-45px!important",
@@ -86,13 +86,13 @@ const useStyles = makeStyles({
 	title: {
 		textTransform: "uppercase",
 		[theme.breakpoints.down("tabletS")]: {
-			fontSize: 28,
+			fontSize: [28, "!important"],
 		},
 		[theme.breakpoints.down("mobileL")]: {
-			fontSize: 24,
+			fontSize: [24, "!important"],
 		},
 		[theme.breakpoints.down("mobileS")]: {
-			fontSize: 20,
+			fontSize: [20, "!important"],
 		},
 	},
 });
@@ -146,7 +146,7 @@ const ModalEditForm = () => {
 		<ThemeProvider theme={theme}>
 			<Container className={classes.container} disableGutters>
 				<Typography component='h1' variant='h5' gutterBottom align='center' className={classes.title}>
-					Add Cocktail to list
+					Edit cocktail
 				</Typography>
 				<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form__form modal-form'>
 					<ModalAddFormInput name='name' label='Enter cocktail name' control={control} errors={errors} defaultValue={name} />
