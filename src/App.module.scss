@@ -20,16 +20,25 @@
 	color: $textColor;
 	background-image: $mainAppGradient;
 
-	@media screen and (max-width: $tabletS) {
+	@media only screen and (max-width: $tabletS) {
 		max-width: 600px;
 		padding: 30px 30px;
 	}
 
-	@media screen and (max-width: $mobileL) {
+	@media only screen and (max-width: $mobileL) {
 		padding: 30px 15px;
+	}
+
+	@media only screen and (max-width: $mobileM) {
+		padding: 20px 10px;
+		margin: 0;
+		border-radius: 0;
 	}
 }
 
 .AppContainer {
 	padding: 0 10px;
+	@media only screen and (max-width: $mobileM) {
+		padding: 0;
+	}
 }

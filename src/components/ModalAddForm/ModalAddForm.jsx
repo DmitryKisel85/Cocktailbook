@@ -31,6 +31,7 @@ const theme = createTheme({
 		values: {
 			tabletS: 768,
 			mobileL: 525,
+			mobileM: 450,
 			mobileS: 360,
 		},
 	},
@@ -41,11 +42,6 @@ const useStyles = makeStyles({
 	container: {
 		position: "relative!important",
 	},
-	textField: {
-		display: "block!important",
-		position: "relative!important",
-		paddingBottom: "30px!important",
-	},
 	formLabel: {
 		display: "block!important",
 		textAlign: "center!important",
@@ -55,12 +51,15 @@ const useStyles = makeStyles({
 		flexDirection: "row!important",
 		justifyContent: "center!important",
 		textAlign: "center!important",
-		[theme.breakpoints.down("mobileL")]: {
+		[theme.breakpoints.down("mobileM")]: {
 			display: "grid!important",
 		},
 	},
 	buttonGroup: {
 		margin: "20px 0 0 0!important",
+		[theme.breakpoints.down("mobileM")]: {
+			margin: "10px 0 0 0!important",
+		},
 	},
 	button: {
 		fontWeight: "bold!important",
@@ -74,6 +73,10 @@ const useStyles = makeStyles({
 		[theme.breakpoints.down("mobileL")]: {
 			right: "-25px!important",
 			top: "-45px!important",
+		},
+		[theme.breakpoints.down("mobileM")]: {
+			right: "-35px!important",
+			top: "-35px!important",
 		},
 	},
 	helperText: {

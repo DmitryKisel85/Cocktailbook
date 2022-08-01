@@ -20,7 +20,7 @@
 }
 
 .modalContent {
-	margin-right: 17px;
+	// margin-right: 17px;
 	width: 35vw;
 	border-radius: 12px;
 	display: flex;
@@ -29,16 +29,24 @@
 	gap: 20px;
 	background-image: $modalContentBackgroundGradient;
 
-	@media screen and (max-width: $tabletL) {
+	@media only screen and (max-width: $tabletL) {
 		width: 60vw;
 	}
 
-	@media screen and (max-width: $tabletS) {
+	@media only screen and (max-width: $tabletS) {
 		width: 75vw;
 	}
 
-	@media screen and (max-width: $mobileL) {
+	@media only screen and (max-width: $mobileL) {
 		width: 85vw;
 		padding: 30px 20px 5px 20px;
+	}
+
+	@media only screen and (max-width: $mobileM) {
+		width: 100vw;
+		// height: 100vh;
+		padding: 20px 20px 10px 20px;
+		overflow-y: auto;
+		justify-content: center;
 	}
 }
