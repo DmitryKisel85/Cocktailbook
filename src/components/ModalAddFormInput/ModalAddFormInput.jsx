@@ -18,14 +18,14 @@ const useStyles = makeStyles({
 	},
 });
 
-const ModalAddFormInput = ({ name, label, control, errors }) => {
+const ModalAddFormInput = ({ name, label, control, errors, defaultValue = "" }) => {
 	const classes = useStyles();
 
 	return (
 		<Controller
 			name={name}
 			control={control}
-			defaultValue=''
+			defaultValue={defaultValue}
 			render={({ field }) => (
 				<div style={{ position: "relative" }}>
 					<TextField {...field} label={label} variant='outlined' error={!!errors[name]} className={classes.textField} fullWidth />

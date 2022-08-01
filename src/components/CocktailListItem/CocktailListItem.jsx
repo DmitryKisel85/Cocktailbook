@@ -13,6 +13,9 @@ const CocktailListItem = ({ cocktail }) => {
 	const handleShowPreviewModal = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "preview", previewCocktail: cocktail }));
 	};
+	const handleShowEditCocktailModal = () => {
+		dispatch(showModalWindow({ typeOfModalWindow: "edit", previewCocktail: cocktail }));
+	};
 
 	return (
 		<div className={styles.root}>
@@ -22,9 +25,14 @@ const CocktailListItem = ({ cocktail }) => {
 			<div className={styles.descriptionBlock}>
 				<div className={styles.descriptionHeader}>
 					<h2>{name}</h2>
-					<button className={styles.previewButton} onClick={handleShowPreviewModal}>
-						<i className={`${styles.previewIcon} fas fa-search`}></i>
-					</button>
+					<div className={styles.btnsBlock}>
+						<button className={styles.previewButton} onClick={handleShowEditCocktailModal}>
+							<i className={`${styles.previewIcon} fas fa-pen`}></i>
+						</button>
+						<button className={styles.previewButton} onClick={handleShowPreviewModal}>
+							<i className={`${styles.previewIcon} fas fa-search`}></i>
+						</button>
+					</div>
 				</div>
 				<p className={styles.description}>
 					<b>Ingredients:</b> {ingredients}

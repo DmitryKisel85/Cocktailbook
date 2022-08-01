@@ -60,7 +60,7 @@ const useStyles = makeStyles({
 	},
 
 	closeButton: {
-		position: "absolute !important",
+		position: "absolute!important",
 		right: "-45px!important",
 		top: "-35px!important",
 		fontSize: 32,
