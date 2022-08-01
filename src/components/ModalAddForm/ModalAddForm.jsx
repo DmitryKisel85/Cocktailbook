@@ -1,17 +1,17 @@
-import PropTypes from "prop-types";
-
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
-import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup, Typography, Container, FormHelperText } from "@mui/material";
+import { RadioGroup, Radio, FormControlLabel, FormLabel, Button, ButtonGroup, Typography, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
 import { hideModalWindow } from "../../store/modal/modalWindowSlice";
 import { addCocktail } from "../../store/cocktail/cocktailSlice";
+
+import ModalAddFormInput from "../ModalAddFormInput";
 
 import { testImage } from "../../services/yupImageValidation";
 
@@ -137,27 +137,6 @@ const ModalAddForm = () => {
 		dispatch(hideModalWindow());
 	};
 
-	const ModalAddFormInput = ({ name, label }) => {
-		return (
-			<Controller
-				name={name}
-				control={control}
-				defaultValue=''
-				render={({ field }) => (
-					<div style={{ position: "relative" }}>
-						<TextField {...field} label={label} variant='outlined' error={!!errors[name]} className={classes.textField} fullWidth />
-						<FormHelperText className={classes.helperText}>{errors ? errors[name]?.message : ""}</FormHelperText>
-					</div>
-				)}
-			/>
-		);
-	};
-
-	ModalAddFormInput.propTypes = {
-		name: PropTypes.string,
-		label: PropTypes.string,
-	};
-
 	return (
 		<ThemeProvider theme={theme}>
 			<Container className={classes.container} disableGutters>
@@ -165,10 +144,10 @@ const ModalAddForm = () => {
 					Add Cocktail to list
 				</Typography>
 				<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form__form modal-form'>
-					<ModalAddFormInput name='name' label='Enter cocktail name' />
-					<ModalAddFormInput name='ingredients' label='Put ingredients' />
-					<ModalAddFormInput name='glass' label='Insert cocktail glass' />
-					<ModalAddFormInput name='imageUrl' label='Enter image URL' />
+					<ModalAddFormInput name='name' label='Enter cocktail name' control={control} errors={errors} />
+					<ModalAddFormInput name='ingredients' label='Put ingredients' control={control} errors={errors} />
+					<ModalAddFormInput name='glass' label='Insert cocktail glass' control={control} errors={errors} />
+					<ModalAddFormInput name='imageUrl' label='Enter image URL' control={control} errors={errors} />
 
 					<Controller
 						name='method'
