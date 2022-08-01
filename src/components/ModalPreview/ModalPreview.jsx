@@ -15,7 +15,7 @@ const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: "Syne",
+		fontFamily: "Syne!important",
 		fontSize: 16,
 	},
 	breakpoints: {
@@ -33,37 +33,40 @@ const theme = createTheme({
 // создаем стили для компонентов MUI
 const useStyles = makeStyles({
 	container: {
-		position: "relative",
+		position: "relative!important",
 	},
 	listTitle: {
-		textAlign: "center",
-		textTransform: "uppercase",
-		fontFamily: "Syne",
-		marginBottom: "30px",
+		textAlign: "center!important",
+		textTransform: "uppercase!important",
+		fontFamily: "Syne!important",
+		marginBottom: "30px!important",
 	},
 
 	listItem: {
-		padding: "20px 0",
+		padding: "20px 0!important",
+		"&:last-child": {
+			padding: "20px 0 0 0!important",
+		},
 	},
 	listImageBox: {
-		width: "350px",
-		height: "350px",
-		margin: "0 auto 20px auto",
+		width: "350px!important",
+		height: "350px!important",
+		margin: "0 auto 20px auto!important",
 	},
 	listImage: {
-		width: "100%",
-		height: "100%",
-		objectFit: "cover",
+		width: "100%!important",
+		height: "100%!important",
+		objectFit: "cover!important",
 	},
 
 	closeButton: {
 		position: "absolute !important",
-		right: "-45px",
-		top: "-35px",
+		right: "-45px!important",
+		top: "-35px!important",
 		fontSize: 32,
 		[theme.breakpoints.down("mobileL")]: {
-			right: "-25px",
-			top: "-35px",
+			right: "-25px!important",
+			top: "-35px!important",
 		},
 	},
 });

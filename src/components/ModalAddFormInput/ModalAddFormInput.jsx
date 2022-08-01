@@ -7,14 +7,14 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
 	textField: {
-		display: "block",
-		position: "relative",
-		paddingBottom: "30px",
+		display: "block!important",
+		position: "relative!important",
+		paddingBottom: "30px!important",
 	},
 	helperText: {
-		position: "absolute",
-		bottom: "10px",
-		color: "#d32f2f",
+		position: "absolute!important",
+		bottom: "10px!important",
+		color: "#d32f2f!important",
 	},
 });
 

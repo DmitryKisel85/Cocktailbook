@@ -39,47 +39,47 @@ const theme = createTheme({
 // создаем стили для компонентов MUI
 const useStyles = makeStyles({
 	container: {
-		position: "relative",
+		position: "relative!important",
 	},
 	textField: {
-		display: "block",
-		position: "relative",
-		paddingBottom: "30px",
+		display: "block!important",
+		position: "relative!important",
+		paddingBottom: "30px!important",
 	},
 	formLabel: {
-		display: "block",
-		textAlign: "center",
+		display: "block!important",
+		textAlign: "center!important",
 	},
 	radioGroup: {
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "center",
-		textAlign: "center",
+		display: "flex!important",
+		flexDirection: "row!important",
+		justifyContent: "center!important",
+		textAlign: "center!important",
 		[theme.breakpoints.down("mobileL")]: {
-			display: "grid",
+			display: "grid!important",
 		},
 	},
 	buttonGroup: {
-		margin: "20px 0 0 0",
+		margin: "20px 0 0 0!important",
 	},
 	button: {
-		fontWeight: "bold",
+		fontWeight: "bold!important",
 		fontSize: 16,
 	},
 	closeButton: {
-		position: "absolute",
-		right: "-45px",
-		top: "-35px",
+		position: "absolute!important",
+		right: "-45px!important",
+		top: "-35px!important",
 		fontSize: 32,
 		[theme.breakpoints.down("mobileL")]: {
-			right: "-25px",
-			top: "-45px",
+			right: "-25px!important",
+			top: "-45px!important",
 		},
 	},
 	helperText: {
-		position: "absolute",
-		bottom: "10px",
-		color: "#d32f2f",
+		position: "absolute!important",
+		bottom: "10px!important",
+		color: "#d32f2f!important",
 	},
 
 	title: {
