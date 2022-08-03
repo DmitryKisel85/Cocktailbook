@@ -40,7 +40,7 @@ const cocktailSlice = createSlice({
 			});
 		},
 		editCocktail: (state, action) => {
-			const newState = state.map((cocktail) => {
+			return state.map((cocktail) => {
 				if (cocktail.id === action.payload.id) {
 					return {
 						id: action.payload.id,
@@ -49,7 +49,6 @@ const cocktailSlice = createSlice({
 				}
 				return cocktail;
 			});
-			return newState;
 		},
 	},
 });
