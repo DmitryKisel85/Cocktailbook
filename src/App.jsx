@@ -7,7 +7,6 @@ import CocktailList from "./components/CocktailList";
 import Modal from "./components/Modal";
 import ModalAddForm from "./components/ModalAddForm";
 import ModalPreview from "./components/ModalPreview";
-import ModalEditForm from "./components/ModalEditForm";
 
 import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "./store/modal/modalWindowSelector";
 
