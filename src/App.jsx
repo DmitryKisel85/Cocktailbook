@@ -40,7 +40,7 @@ function App() {
 					<Modal>
 						{typeOfModal === "form" && <ModalAddForm />}
 						{typeOfModal === "preview" && <ModalPreview />}
-						{typeOfModal === "edit" && <ModalEditForm />}
+						{typeOfModal === "edit" && <ModalAddForm isEdit />}
 					</Modal>
 				)}
 			</div>

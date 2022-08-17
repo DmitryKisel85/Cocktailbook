@@ -1,5 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
@@ -10,6 +10,9 @@ import { makeStyles } from "@mui/styles";
 
 import { hideModalWindow } from "../../store/modal/modalWindowSlice";
 import { addCocktail } from "../../store/cocktail/cocktailSlice";
+import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
+
+import { deleteCocktail, editCocktail } from "../../store/cocktail/cocktailSlice";
 
 import ModalAddFormInput from "../ModalAddFormInput";
 
@@ -108,7 +111,7 @@ const schema = yup.object().shape({
 	imageUrl: yup.string().test("valid-image-url", "Must use valid image URL or leave input field empty", (value) => testImage(value, 1000).then((status) => status === "success")),
 });
 
-const ModalAddForm = () => {
+const ModalAddForm = ({ isEdit }) => {
 	const {
 		handleSubmit,
 		control,
@@ -118,6 +121,8 @@ const ModalAddForm = () => {
 		resolver: yupResolver(schema),
 	});
 
+	const cocktailPreview = useSelector(modalWindowCocktailPreview);
+
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
@@ -126,17 +131,28 @@ const ModalAddForm = () => {
 			data.imageUrl = "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png";
 		}
 
-		const newCocktail = {
-			id: uuidv4(),
-			...data,
-		};
-		dispatch(addCocktail(newCocktail));
-		reset();
-		dispatch(hideModalWindow());
+		if (isEdit) {
+			dispatch(editCocktail({ id: cocktailPreview.id, data: data }));
+			reset();
+			dispatch(hideModalWindow());
+		} else {
+			const newCocktail = {
+				id: uuidv4(),
+				...data,
+			};
+			dispatch(addCocktail(newCocktail));
+			reset();
+			dispatch(hideModalWindow());
+		}
 	};
 
 	const closeButtonHandler = () => {
 		reset();
+		dispatch(hideModalWindow());
+	};
+
+	const deleteItemHandler = () => {
+		dispatch(deleteCocktail(cocktailPreview.id));
 		dispatch(hideModalWindow());
 	};
 
@@ -147,15 +163,15 @@ const ModalAddForm = () => {
 					Add Cocktail to list
 				</Typography>
 				<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form__form modal-form'>
-					<ModalAddFormInput name='name' label='Enter cocktail name' control={control} errors={errors} />
-					<ModalAddFormInput name='ingredients' label='Put ingredients' control={control} errors={errors} />
-					<ModalAddFormInput name='glass' label='Insert cocktail glass' control={control} errors={errors} />
-					<ModalAddFormInput name='imageUrl' label='Enter image URL' control={control} errors={errors} />
+					<ModalAddFormInput name='name' label='Enter cocktail name' control={control} errors={errors} defaultValue={cocktailPreview?.name || ""} />
+					<ModalAddFormInput name='ingredients' label='Put ingredients' control={control} errors={errors} defaultValue={cocktailPreview?.ingredients || ""} />
+					<ModalAddFormInput name='glass' label='Insert cocktail glass' control={control} errors={errors} defaultValue={cocktailPreview?.glass || ""} />
+					<ModalAddFormInput name='imageUrl' label='Enter image URL' control={control} errors={errors} defaultValue={cocktailPreview?.imageUrl || ""} />
 
 					<Controller
 						name='method'
 						control={control}
-						defaultValue='build'
+						defaultValue={cocktailPreview?.method || "build"}
 						render={({ field }) => {
 							return (
 								<>
@@ -172,14 +188,25 @@ const ModalAddForm = () => {
 							);
 						}}
 					/>
-					<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
-						<Button type='submit' className={classes.button}>
-							Submit
-						</Button>
-						<Button className={classes.button} onClick={() => reset()}>
-							Reset
-						</Button>
-					</ButtonGroup>
+					{isEdit ? (
+						<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
+							<Button type='submit' className={classes.button}>
+								Save
+							</Button>
+							<Button className={classes.button} onClick={deleteItemHandler}>
+								Delete Cocktail
+							</Button>
+						</ButtonGroup>
+					) : (
+						<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
+							<Button type='submit' className={classes.button}>
+								Submit
+							</Button>
+							<Button className={classes.button} onClick={() => reset()}>
+								Reset
+							</Button>
+						</ButtonGroup>
+					)}
 				</form>
 				<Button className={classes.closeButton} onClick={closeButtonHandler}>
 					&times;
