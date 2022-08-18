@@ -7,14 +7,24 @@
 	border-radius: 10px;
 	margin-bottom: 20px;
 
-	@media screen and (max-width: $mobileL) {
+	@media only screen and (max-width: $mobileL) {
 		grid-template-columns: 1fr 2fr;
+	}
+	@media only screen and (max-width: $mobileM) {
+		grid-template-columns: 1fr;
 	}
 }
 
 .img {
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
+
+	@media only screen and (max-width: $mobileM) {
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 }
 
 .imgBlock {
@@ -31,11 +41,16 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+
+	@media only screen and (max-width: $mobileM) {
+		padding: 15px 15px;
+	}
 }
 
 .descriptionHeader {
 	width: 100%;
 	display: flex;
+	gap: 10px;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 15px;
@@ -60,4 +75,9 @@
 .previewIcon {
 	color: $textColor;
 	font-size: 20px;
+}
+
+.btnsBlock {
+	display: flex;
+	gap: 20px;
 }

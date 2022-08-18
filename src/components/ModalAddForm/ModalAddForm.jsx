@@ -1,5 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
@@ -10,6 +10,9 @@ import { makeStyles } from "@mui/styles";
 
 import { hideModalWindow } from "../../store/modal/modalWindowSlice";
 import { addCocktail } from "../../store/cocktail/cocktailSlice";
+import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
+
+import { deleteCocktail, editCocktail } from "../../store/cocktail/cocktailSlice";
 
 import ModalAddFormInput from "../ModalAddFormInput";
 
@@ -31,6 +34,7 @@ const theme = createTheme({
 		values: {
 			tabletS: 768,
 			mobileL: 525,
+			mobileM: 450,
 			mobileS: 360,
 		},
 	},
@@ -41,11 +45,6 @@ const useStyles = makeStyles({
 	container: {
 		position: "relative!important",
 	},
-	textField: {
-		display: "block!important",
-		position: "relative!important",
-		paddingBottom: "30px!important",
-	},
 	formLabel: {
 		display: "block!important",
 		textAlign: "center!important",
@@ -55,25 +54,32 @@ const useStyles = makeStyles({
 		flexDirection: "row!important",
 		justifyContent: "center!important",
 		textAlign: "center!important",
-		[theme.breakpoints.down("mobileL")]: {
+		[theme.breakpoints.down("mobileM")]: {
 			display: "grid!important",
 		},
 	},
 	buttonGroup: {
 		margin: "20px 0 0 0!important",
+		[theme.breakpoints.down("mobileM")]: {
+			margin: "10px 0 0 0!important",
+		},
 	},
 	button: {
 		fontWeight: "bold!important",
-		fontSize: 16,
+		fontSize: [16, "!important"],
 	},
 	closeButton: {
 		position: "absolute!important",
 		right: "-45px!important",
 		top: "-35px!important",
-		fontSize: 32,
+		fontSize: [32, "!important"],
 		[theme.breakpoints.down("mobileL")]: {
 			right: "-25px!important",
 			top: "-45px!important",
+		},
+		[theme.breakpoints.down("mobileM")]: {
+			right: "-35px!important",
+			top: "-35px!important",
 		},
 	},
 	helperText: {
@@ -85,13 +91,13 @@ const useStyles = makeStyles({
 	title: {
 		textTransform: "uppercase",
 		[theme.breakpoints.down("tabletS")]: {
-			fontSize: 28,
+			fontSize: [28, "!important"],
 		},
 		[theme.breakpoints.down("mobileL")]: {
-			fontSize: 24,
+			fontSize: [26, "!important"],
 		},
 		[theme.breakpoints.down("mobileS")]: {
-			fontSize: 20,
+			fontSize: [20, "!important"],
 		},
 	},
 });
@@ -105,7 +111,7 @@ const schema = yup.object().shape({
 	imageUrl: yup.string().test("valid-image-url", "Must use valid image URL or leave input field empty", (value) => testImage(value, 1000).then((status) => status === "success")),
 });
 
-const ModalAddForm = () => {
+const ModalAddForm = ({ isEdit }) => {
 	const {
 		handleSubmit,
 		control,
@@ -115,6 +121,8 @@ const ModalAddForm = () => {
 		resolver: yupResolver(schema),
 	});
 
+	const cocktailPreview = useSelector(modalWindowCocktailPreview);
+
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
@@ -123,13 +131,16 @@ const ModalAddForm = () => {
 			data.imageUrl = "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png";
 		}
 
-		const newCocktail = {
-			id: uuidv4(),
-			...data,
-		};
-		dispatch(addCocktail(newCocktail));
-		reset();
-		dispatch(hideModalWindow());
+		if (isEdit) {
+			dispatch(editCocktail({ id: cocktailPreview.id, data: data }));
+		} else {
+			const newCocktail = {
+				id: uuidv4(),
+				...data,
+			};
+			dispatch(addCocktail(newCocktail));
+		}
+		closeButtonHandler();
 	};
 
 	const closeButtonHandler = () => {
@@ -137,22 +148,26 @@ const ModalAddForm = () => {
 		dispatch(hideModalWindow());
 	};
 
+	const deleteItemHandler = () => {
+		dispatch(deleteCocktail(cocktailPreview.id));
+		dispatch(hideModalWindow());
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Container className={classes.container} disableGutters>
 				<Typography component='h1' variant='h5' gutterBottom align='center' className={classes.title}>
-					Add Cocktail to list
+					{isEdit ? "Edit Cocktail" : "Add Cocktail to list"}
 				</Typography>
 				<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form__form modal-form'>
-					<ModalAddFormInput name='name' label='Enter cocktail name' control={control} errors={errors} />
-					<ModalAddFormInput name='ingredients' label='Put ingredients' control={control} errors={errors} />
-					<ModalAddFormInput name='glass' label='Insert cocktail glass' control={control} errors={errors} />
-					<ModalAddFormInput name='imageUrl' label='Enter image URL' control={control} errors={errors} />
-
+					<ModalAddFormInput name='name' label='Enter cocktail name' control={control} errors={errors} defaultValue={cocktailPreview?.name || ""} />
+					<ModalAddFormInput name='ingredients' label='Put ingredients' control={control} errors={errors} defaultValue={cocktailPreview?.ingredients || ""} />
+					<ModalAddFormInput name='glass' label='Insert cocktail glass' control={control} errors={errors} defaultValue={cocktailPreview?.glass || ""} />
+					<ModalAddFormInput name='imageUrl' label='Enter image URL' control={control} errors={errors} defaultValue={cocktailPreview?.imageUrl || ""} />
 					<Controller
 						name='method'
 						control={control}
-						defaultValue='build'
+						defaultValue={cocktailPreview?.method || "build"}
 						render={({ field }) => {
 							return (
 								<>
@@ -171,10 +186,10 @@ const ModalAddForm = () => {
 					/>
 					<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
 						<Button type='submit' className={classes.button}>
-							Submit
+							{isEdit ? "Save" : "Submit"}
 						</Button>
-						<Button className={classes.button} onClick={() => reset()}>
-							Reset
+						<Button className={classes.button} onClick={isEdit ? deleteItemHandler : () => reset()}>
+							{isEdit ? "Delete Cocktail" : "Reset"}
 						</Button>
 					</ButtonGroup>
 				</form>

@@ -12,7 +12,7 @@ import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "./store/moda
 
 import { useScrollLock } from "./hooks/useScrollLock";
 
-import "./App.scss";
+import styles from "./App.module.scss";
 
 function App() {
 	const modalState = useSelector(modalWindowIsOpenSelector);
@@ -31,15 +31,18 @@ function App() {
 	}, [modalState]);
 
 	return (
-		<div className='App'>
-			<Header />
-			<CocktailList />
-			{modalState && (
-				<Modal>
-					{typeOfModal === "form" && <ModalAddForm />}
-					{typeOfModal === "preview" && <ModalPreview />}
-				</Modal>
-			)}
+		<div className={styles.AppContainer}>
+			<div className={styles.App}>
+				<Header />
+				<CocktailList />
+				{modalState && (
+					<Modal>
+						{typeOfModal === "form" && <ModalAddForm />}
+						{typeOfModal === "preview" && <ModalPreview />}
+						{typeOfModal === "edit" && <ModalAddForm isEdit />}
+					</Modal>
+				)}
+			</div>
 		</div>
 	);
 }
