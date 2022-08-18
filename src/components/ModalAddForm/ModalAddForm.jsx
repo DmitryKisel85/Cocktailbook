@@ -133,17 +133,14 @@ const ModalAddForm = ({ isEdit }) => {
 
 		if (isEdit) {
 			dispatch(editCocktail({ id: cocktailPreview.id, data: data }));
-			reset();
-			dispatch(hideModalWindow());
 		} else {
 			const newCocktail = {
 				id: uuidv4(),
 				...data,
 			};
 			dispatch(addCocktail(newCocktail));
-			reset();
-			dispatch(hideModalWindow());
 		}
+		closeButtonHandler();
 	};
 
 	const closeButtonHandler = () => {
@@ -160,14 +157,13 @@ const ModalAddForm = ({ isEdit }) => {
 		<ThemeProvider theme={theme}>
 			<Container className={classes.container} disableGutters>
 				<Typography component='h1' variant='h5' gutterBottom align='center' className={classes.title}>
-					Add Cocktail to list
+					{isEdit ? "Edit Cocktail" : "Add Cocktail to list"}
 				</Typography>
 				<form onSubmit={handleSubmit(formSubmitHandler)} className='modal-add-form__form modal-form'>
 					<ModalAddFormInput name='name' label='Enter cocktail name' control={control} errors={errors} defaultValue={cocktailPreview?.name || ""} />
 					<ModalAddFormInput name='ingredients' label='Put ingredients' control={control} errors={errors} defaultValue={cocktailPreview?.ingredients || ""} />
 					<ModalAddFormInput name='glass' label='Insert cocktail glass' control={control} errors={errors} defaultValue={cocktailPreview?.glass || ""} />
 					<ModalAddFormInput name='imageUrl' label='Enter image URL' control={control} errors={errors} defaultValue={cocktailPreview?.imageUrl || ""} />
-
 					<Controller
 						name='method'
 						control={control}
@@ -188,25 +184,14 @@ const ModalAddForm = ({ isEdit }) => {
 							);
 						}}
 					/>
-					{isEdit ? (
-						<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
-							<Button type='submit' className={classes.button}>
-								Save
-							</Button>
-							<Button className={classes.button} onClick={deleteItemHandler}>
-								Delete Cocktail
-							</Button>
-						</ButtonGroup>
-					) : (
-						<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
-							<Button type='submit' className={classes.button}>
-								Submit
-							</Button>
-							<Button className={classes.button} onClick={() => reset()}>
-								Reset
-							</Button>
-						</ButtonGroup>
-					)}
+					<ButtonGroup variant='text' className={classes.buttonGroup} fullWidth>
+						<Button type='submit' className={classes.button}>
+							{isEdit ? "Save" : "Submit"}
+						</Button>
+						<Button className={classes.button} onClick={isEdit ? deleteItemHandler : () => reset()}>
+							{isEdit ? "Delete Cocktail" : "Reset"}
+						</Button>
+					</ButtonGroup>
 				</form>
 				<Button className={classes.closeButton} onClick={closeButtonHandler}>
 					&times;
