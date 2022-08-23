@@ -2,7 +2,7 @@ import { memo } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { cocktailsSelector } from "../../store/cocktail/cocktailSelector";
+import { searchTermSelector, cocktailsSelector } from "../../store/cocktail/cocktailSelector";
 
 import { showModalWindow } from "../../store/modal/modalWindowSlice";
 
@@ -12,6 +12,7 @@ import styles from "./cocktailList.module.scss";
 
 const CocktailList = () => {
 	const cocktails = useSelector(cocktailsSelector);
+	const searchTerm = useSelector(searchTermSelector);
 
 	const dispatch = useDispatch();
 
@@ -19,9 +20,13 @@ const CocktailList = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "form" }));
 	};
 
-	const cocktailListToRender = cocktails.map((cocktail) => {
-		return <CocktailListItem key={cocktail.id} cocktail={cocktail} />;
-	});
+	const cocktailListToRender = cocktails
+		.filter(
+			(cocktail) => cocktail.name.toLowerCase().includes(searchTerm) || cocktail.ingredients.toLowerCase().includes(searchTerm) || cocktail.method.toLowerCase().includes(searchTerm) || cocktail.glass.toLowerCase().includes(searchTerm)
+		)
+		.map((cocktail) => {
+			return <CocktailListItem key={cocktail.id} cocktail={cocktail} />;
+		});
 
 	return (
 		<ul className={styles.root}>

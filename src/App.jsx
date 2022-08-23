@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import Header from "./components/Header";
 import CocktailList from "./components/CocktailList";
+import SearchBox from "./components/SearchBox";
 
 import Modal from "./components/Modal";
 import ModalAddForm from "./components/ModalAddForm";
@@ -34,6 +35,7 @@ function App() {
 		<div className={styles.AppContainer}>
 			<div className={styles.App}>
 				<Header />
+				<SearchBox />
 				<CocktailList />
 				{modalState && (
 					<Modal>
