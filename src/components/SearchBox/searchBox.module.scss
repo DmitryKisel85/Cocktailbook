@@ -36,3 +36,9 @@
 		background-image: none;
 	}
 }
+
+@media screen and (max-width: $tabletS) {
+	.searchBox {
+		width: 75%;
+	}
+}
