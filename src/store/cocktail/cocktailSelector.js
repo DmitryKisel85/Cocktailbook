@@ -14,3 +14,14 @@ export const filteredCocktailsSelector = createSelector(
 		);
 	}
 );
+
+export const cocktailByIdSelector = (id) =>
+	createSelector(
+		(state) => state.cocktails,
+		(cocktails) => cocktails.cocktails.filter((cocktail) => cocktail.id === id)
+	);
+
+export const searchTermSelector = createSelector(
+	(state) => state.cocktails,
+	(cocktails) => cocktails.searchTerm
+);

@@ -1,13 +1,6 @@
-@import "./styles/variables.scss";
+@import "../../styles/variables.scss";
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Syne", sans-serif;
-}
-
-.App {
+.main {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -36,7 +29,7 @@
 	}
 }
 
-.AppContainer {
+.root {
 	padding: 0 10px;
 	@media only screen and (max-width: $mobileM) {
 		padding: 0;

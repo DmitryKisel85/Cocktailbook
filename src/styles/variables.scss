@@ -1,18 +1,5 @@
 $textColor: #40312a;
-$mainAppGradient: linear-gradient(
-	45deg,
-	hsl(35deg 48% 43%) 0%,
-	hsl(35deg 48% 46%) 11%,
-	hsl(35deg 48% 50%) 21%,
-	hsl(35deg 54% 53%) 31%,
-	hsl(35deg 56% 55%) 41%,
-	hsl(36deg 56% 56%) 51%,
-	hsl(36deg 56% 57%) 60%,
-	hsl(36deg 56% 59%) 70%,
-	hsl(35deg 56% 62%) 80%,
-	hsl(35deg 56% 65%) 90%,
-	hsl(35deg 56% 68%) 100%
-);
+$mainAppGradient: linear-gradient(45deg, #a27639 0%, #ae7f3d 11%, #bd8a42 21%, #c89246 31%, #cd974c 41%, #ce9b50 51%, #cf9e54 60%, #d1a25c 70%, #d4a768 80%, #d8ae74 90%, #dbb580 100%);
 
 $addButtonGradient: linear-gradient(
 	90deg,
