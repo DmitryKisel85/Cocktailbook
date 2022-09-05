@@ -17,35 +17,33 @@ const CocktailListItem = ({ cocktail }) => {
 	};
 
 	return (
-		<>
-			<div className={styles.root}>
-				<div className={styles.imgBlock}>
-					<img className={styles.img} src={imageUrl} alt='cocktail' />
-				</div>
-				<div className={styles.descriptionBlock}>
-					<div className={styles.descriptionHeader}>
-						<h2>{name}</h2>
-						<div className={styles.btnsBlock}>
-							<button className={styles.previewButton} onClick={handleShowEditCocktailModal}>
-								<i className={`${styles.previewIcon} fas fa-pen`}></i>
-							</button>
-							<Link to={`/cocktail/${id}`} className={styles.previewButton}>
-								<i className={`${styles.previewIcon} fas fa-search`}></i>
-							</Link>
-						</div>
-					</div>
-					<p className={styles.description}>
-						<b>Ingredients:</b> {ingredients}
-					</p>
-					<p className={styles.description}>
-						<b>Method:</b> {method}
-					</p>
-					<p className={styles.description}>
-						<b>Glass:</b> {glass}
-					</p>
-				</div>
+		<div className={styles.root}>
+			<div className={styles.imgBlock}>
+				<img className={styles.img} src={imageUrl} alt='cocktail' />
 			</div>
-		</>
+			<div className={styles.descriptionBlock}>
+				<div className={styles.descriptionHeader}>
+					<h2>{name}</h2>
+					<div className={styles.btnsBlock}>
+						<button className={styles.previewButton} onClick={handleShowEditCocktailModal}>
+							<i className={`${styles.previewIcon} fas fa-pen`}></i>
+						</button>
+						<Link to={`/cocktail/${id}`} className={styles.previewButton}>
+							<i className={`${styles.previewIcon} fas fa-search`}></i>
+						</Link>
+					</div>
+				</div>
+				<p className={styles.description}>
+					<b>Ingredients:</b> {ingredients}
+				</p>
+				<p className={styles.description}>
+					<b>Method:</b> {method}
+				</p>
+				<p className={styles.description}>
+					<b>Glass:</b> {glass}
+				</p>
+			</div>
+		</div>
 	);
 };
 
