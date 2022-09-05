@@ -1,5 +1,3 @@
-@import "./styles/variables.scss";
-
 * {
 	margin: 0;
 	padding: 0;
@@ -7,38 +5,9 @@
 	font-family: "Syne", sans-serif;
 }
 
-.App {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	font-size: 18px;
-	align-items: center;
-	max-width: 800px;
-	padding: 40px 60px;
-	margin: 50px auto;
-	border-radius: 15px;
-	color: $textColor;
-	background-image: $mainAppGradient;
-
-	@media only screen and (max-width: $tabletS) {
-		max-width: 600px;
-		padding: 30px 30px;
-	}
-
-	@media only screen and (max-width: $mobileL) {
-		padding: 30px 15px;
-	}
-
-	@media only screen and (max-width: $mobileM) {
-		padding: 20px 10px;
-		margin: 0;
-		border-radius: 0;
-	}
-}
-
-.AppContainer {
-	padding: 0 10px;
-	@media only screen and (max-width: $mobileM) {
-		padding: 0;
-	}
+a,
+a:active,
+a:visited {
+	text-decoration: none;
+	color: black;
 }

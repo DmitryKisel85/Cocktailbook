@@ -2,17 +2,16 @@ import PropTypes from "prop-types";
 
 import { useDispatch } from "react-redux";
 
+import { Link } from "react-router-dom";
+
 import { showModalWindow } from "../../store/modal/modalWindowSlice";
 
 import styles from "./cocktailListItem.module.scss";
 
 const CocktailListItem = ({ cocktail }) => {
 	const dispatch = useDispatch();
-	const { name, ingredients, method, glass, imageUrl } = cocktail;
+	const { id, name, ingredients, method, glass, imageUrl } = cocktail;
 
-	const handleShowPreviewModal = () => {
-		dispatch(showModalWindow({ typeOfModalWindow: "preview", previewCocktail: cocktail }));
-	};
 	const handleShowEditCocktailModal = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "edit", previewCocktail: cocktail }));
 	};
@@ -29,9 +28,9 @@ const CocktailListItem = ({ cocktail }) => {
 						<button className={styles.previewButton} onClick={handleShowEditCocktailModal}>
 							<i className={`${styles.previewIcon} fas fa-pen`}></i>
 						</button>
-						<button className={styles.previewButton} onClick={handleShowPreviewModal}>
+						<Link to={`/cocktail/${id}`} className={styles.previewButton}>
 							<i className={`${styles.previewIcon} fas fa-search`}></i>
-						</button>
+						</Link>
 					</div>
 				</div>
 				<p className={styles.description}>

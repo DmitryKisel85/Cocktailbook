@@ -1,50 +1,19 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header";
-import CocktailList from "./components/CocktailList";
-import SearchBox from "./components/SearchBox";
+import HomePage from "./components/HomePage";
+import CocktailPreviewPage from "./components/CocktailPreviewPage";
+import NotFoundPage from "./components/NotFoundPage";
 
-import Modal from "./components/Modal";
-import ModalAddForm from "./components/ModalAddForm";
-import ModalPreview from "./components/ModalPreview";
-
-import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "./store/modal/modalWindowSelector";
-
-import { useScrollLock } from "./hooks/useScrollLock";
-
-import styles from "./App.module.scss";
+import styles from "./app.module.scss";
 
 function App() {
-	const modalState = useSelector(modalWindowIsOpenSelector);
-	const typeOfModal = useSelector(modalWindowTypeSelector);
-
-	const { lockScroll, unlockScroll } = useScrollLock();
-
-	// блокируем скролл, когда открыто модальное окно
-	useEffect(() => {
-		if (modalState) {
-			lockScroll();
-		} else {
-			unlockScroll();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [modalState]);
-
 	return (
-		<div className={styles.AppContainer}>
-			<div className={styles.App}>
-				<Header />
-				<SearchBox />
-				<CocktailList />
-				{modalState && (
-					<Modal>
-						{typeOfModal === "form" && <ModalAddForm />}
-						{typeOfModal === "preview" && <ModalPreview />}
-						{typeOfModal === "edit" && <ModalAddForm isEdit />}
-					</Modal>
-				)}
-			</div>
+		<div className={styles.app}>
+			<Routes>
+				<Route path='/' element={<HomePage />} />
+				<Route path='/cocktail/:id' element={<CocktailPreviewPage />} />
+				<Route path='*' element={<NotFoundPage />} />
+			</Routes>
 		</div>
 	);
 }

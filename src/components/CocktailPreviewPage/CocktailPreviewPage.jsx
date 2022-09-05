@@ -1,11 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { Divider, Chip, List, ListItem, Typography, Container, Button, Box } from "@mui/material";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { Divider, Chip, List, ListItem, Typography, Container, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
-import { hideModalWindow } from "../../store/modal/modalWindowSlice";
+import { cocktailByIdSelector } from "../../store/cocktail/cocktailSelector";
+import NotFoundPage from "../NotFoundPage";
 
 // устанавливаем базовые настройки Material UI
 const theme = createTheme({
@@ -35,6 +38,13 @@ const theme = createTheme({
 const useStyles = makeStyles({
 	container: {
 		position: "relative!important",
+		maxWidth: "800px!important",
+		borderRadius: "12px!important",
+		display: "flex!important",
+		flexDirection: "column!important",
+		padding: "30px 40px!important",
+		margin: "50px auto!important",
+		backgroundImage: "linear-gradient(45deg, #a27639 0%, #ae7f3d 11%, #bd8a42 21%, #c89246 31%, #cd974c 41%, #ce9b50 51%, #cf9e54 60%, #d1a25c 70%, #d4a768 80%, #d8ae74 90%, #dbb580 100%)!important",
 	},
 	listTitle: {
 		textAlign: "center!important",
@@ -61,7 +71,7 @@ const useStyles = makeStyles({
 	listImageBox: {
 		width: "350px!important",
 		height: "350px!important",
-		margin: "0 auto 20px auto!important",
+		margin: "20px auto 20px auto!important",
 		[theme.breakpoints.down("mobileM")]: {
 			width: "300px!important",
 			height: "300px!important",
@@ -77,36 +87,40 @@ const useStyles = makeStyles({
 		objectFit: "cover!important",
 	},
 
-	closeButton: {
+	backButton: {
 		position: "absolute!important",
-		right: "-45px!important",
-		top: "-35px!important",
-		fontSize: 32,
-		[theme.breakpoints.down("mobileL")]: {
-			right: "-25px!important",
-			top: "-35px!important",
-		},
-		[theme.breakpoints.down("mobileM")]: {
-			right: "-35px!important",
-			top: "-35px!important",
+		left: "20px!important",
+		top: "20px!important",
+		fontSize: "20px!important",
+		color: "#40312a!important",
+		transform: "scale(1)",
+		transition: "transform 0.3s",
+		"&:hover": {
+			transform: "scale(1.1)!important",
 		},
 	},
 });
 
-const ModalPreview = () => {
-	const cocktailPreview = useSelector(modalWindowCocktailPreview);
-	const { name, ingredients, method, glass, imageUrl } = cocktailPreview;
+const CocktailPreviewPage = () => {
+	const { id } = useParams();
 
 	const classes = useStyles();
-	const dispatch = useDispatch();
 
-	const closeModalHandler = () => {
-		dispatch(hideModalWindow());
-	};
+	const [cocktailPreview] = useSelector(cocktailByIdSelector(id));
+
+	if (!cocktailPreview) {
+		return <NotFoundPage />;
+	}
+
+	const { name, ingredients, method, glass, imageUrl } = cocktailPreview;
 
 	return (
 		<ThemeProvider theme={theme}>
 			<Container className={classes.container} disableGutters>
+				<Link to='/' className={classes.backButton}>
+					<i className='fas fa-arrow-left'></i>
+					<span> HOME</span>
+				</Link>
 				<Box className={classes.listImageBox}>
 					<img id={name} src={imageUrl} className={classes.listImage} alt={name} />
 				</Box>
@@ -127,12 +141,9 @@ const ModalPreview = () => {
 					</Divider>
 					<ListItem className={classes.listItem}>{glass}</ListItem>
 				</List>
-				<Button className={classes.closeButton} onClick={closeModalHandler}>
-					&times;
-				</Button>
 			</Container>
 		</ThemeProvider>
 	);
 };
 
-export default ModalPreview;
+export default CocktailPreviewPage;
