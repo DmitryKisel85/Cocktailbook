@@ -1,19 +1,28 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { filteredCocktailsSelector } from "../../store/cocktail/cocktailSelector";
+import { filteredCocktailsSelector, isLoadingSelector } from "../../store/cocktail/cocktailSelector";
+
+import { COCKTAILS_FETCH_START } from "../../store/cocktail/cocktailActions";
 
 import { showModalWindow } from "../../store/modal/modalWindowSlice";
 
 import CocktailListItem from "../CocktailListItem";
+import Spinner from "../Spinner";
 
 import styles from "./cocktailList.module.scss";
 
 const CocktailList = () => {
 	const filteredCocktailsList = useSelector(filteredCocktailsSelector);
 
+	const isLoading = useSelector(isLoadingSelector);
+
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch({ type: COCKTAILS_FETCH_START });
+	}, []);
 
 	const handleShowForm = () => {
 		dispatch(showModalWindow({ typeOfModalWindow: "form" }));
@@ -23,7 +32,9 @@ const CocktailList = () => {
 		return <CocktailListItem key={cocktail.id} cocktail={cocktail} />;
 	});
 
-	return (
+	return isLoading ? (
+		<Spinner />
+	) : (
 		<ul className={styles.root}>
 			{cocktailListToRender}
 			<button className={styles.addButton} onClick={handleShowForm}>

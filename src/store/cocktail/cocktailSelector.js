@@ -25,3 +25,8 @@ export const searchTermSelector = createSelector(
 	(state) => state.cocktails,
 	(cocktails) => cocktails.searchTerm
 );
+
+export const isLoadingSelector = createSelector(
+	(state) => state.cocktails,
+	(cocktails) => cocktails.isLoading
+);

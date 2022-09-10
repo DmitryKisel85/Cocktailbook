@@ -1,48 +1,59 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	cocktails: [
-		{
-			id: "1",
-			name: "Daiquiri",
-			ingredients: "rum 60ml, lime juice 20ml, superfine sugar 2 spoons",
-			method: "shake",
-			glass: "cocktail glass",
-			imageUrl: "https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg",
-		},
-		{
-			id: "2",
-			name: "Negroni",
-			ingredients: "gin 30ml, campari 30ml, sweet red vermouth 30ml",
-			method: "build",
-			glass: "old fashioned",
-			imageUrl: "https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg",
-		},
-		{
-			id: "3",
-			name: "Manhattan",
-			ingredients: "rye whiskey 50ml, sweet red vermouth 20ml, Angostura bitters 1 dash",
-			method: "stir",
-			glass: "cocktail glass",
-			imageUrl: "https://www.thecocktaildb.com/images/media/drink/yk70e31606771240.jpg",
-		},
-	],
+	cocktails: [],
 	searchTerm: "",
+	isLoading: false,
+	error: null,
 };
 
 const cocktailSlice = createSlice({
 	name: "cocktailReducer",
 	initialState,
 	reducers: {
-		addCocktail: (state, action) => {
+		searchCocktail: (state, action) => {
+			state.searchTerm = action.payload;
+		},
+		fetchCocktailsToListStart: (state, action) => {
+			state.isLoading = true;
+		},
+		fetchCocktailsToListSuccess: (state, action) => {
+			state.cocktails.push(...action.payload);
+			state.isLoading = false;
+		},
+		fetchCocktailsToListError: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
+		postCocktailsToListSuccess: (state, action) => {
+			state.isLoading = false;
 			state.cocktails.push(action.payload);
 		},
-		deleteCocktail: (state, action) => {
+		postCocktailToListStart: (state, action) => {
+			state.isLoading = true;
+		},
+		postCocktailsToListError: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
+		deleteCocktailFromListStart: (state, action) => {
+			state.isLoading = true;
+		},
+		deleteCocktailFromListSuccess: (state, action) => {
+			state.isLoading = false;
 			state.cocktails = state.cocktails.filter((cocktail) => {
 				return cocktail.id !== action.payload;
 			});
 		},
-		editCocktail: (state, action) => {
+		deleteCocktailFromListError: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
+		editCocktailInListStart: (state, action) => {
+			state.isLoading = true;
+		},
+		editCocktailInListSuccess: (state, action) => {
+			state.isLoading = false;
 			state.cocktails = state.cocktails.map((cocktail) => {
 				if (cocktail.id === action.payload.id) {
 					return {
@@ -53,8 +64,9 @@ const cocktailSlice = createSlice({
 				return cocktail;
 			});
 		},
-		searchCocktail: (state, action) => {
-			state.searchTerm = action.payload;
+		editCocktailInListError: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
 		},
 	},
 });
@@ -63,4 +75,21 @@ const { actions, reducer } = cocktailSlice;
 
 export default reducer;
 
-export const { addCocktail, deleteCocktail, editCocktail, searchCocktail } = actions;
+export const {
+	addCocktail,
+	deleteCocktail,
+	editCocktail,
+	searchCocktail,
+	fetchCocktailsToListStart,
+	fetchCocktailsToListSuccess,
+	fetchCocktailsToListError,
+	postCocktailToListStart,
+	postCocktailsToListError,
+	postCocktailsToListSuccess,
+	deleteCocktailFromListStart,
+	deleteCocktailFromListSuccess,
+	deleteCocktailFromListError,
+	editCocktailInListStart,
+	editCocktailInListSuccess,
+	editCocktailInListError,
+} = actions;
