@@ -150,7 +150,6 @@ const ModalAddForm = ({ isEdit }) => {
 
 	const deleteItemHandler = () => {
 		dispatch({ type: COCKTAIL_DELETE_START, payload: cocktailPreview.id });
-		// dispatch(deleteCocktail(cocktailPreview.id));
 		dispatch(hideModalWindow());
 	};
 

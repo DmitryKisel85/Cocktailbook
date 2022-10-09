@@ -1,5 +1,5 @@
 export const fetchCocktails = async (url) => {
-	try {
+	
 		const response = await fetch(url);
 
 		if (!response.ok) {
@@ -7,13 +7,11 @@ export const fetchCocktails = async (url) => {
 		}
 
 		return await response.json();
-	} catch (error) {
-		throw new Error(`Fetching error! ${error}`);
-	}
+	
 };
 
 export const postNewCocktail = async (url, uploadData) => {
-	try {
+	
 		const response = await fetch(url, {
 			method: "POST",
 			headers: {
@@ -27,13 +25,11 @@ export const postNewCocktail = async (url, uploadData) => {
 		}
 
 		return await response.json();
-	} catch (error) {
-		throw new Error(`Posting error! ${error}`);
-	}
+	
 };
 
 export const deleteCocktail = async (url, id) => {
-	try {
+	
 		const response = await fetch(`${url}/${id}`, {
 			method: "DELETE",
 		});
@@ -43,15 +39,13 @@ export const deleteCocktail = async (url, id) => {
 		}
 
 		return await response.json();
-	} catch (error) {
-		throw new Error(`Deleting error! ${error}`);
-	}
+	
 };
 
 export const editCocktail = async (url, uploadData) => {
 	const { id, data } = uploadData;
 
-	try {
+	
 		const response = await fetch(`${url}/${id}`, {
 			method: "PUT",
 			headers: {
@@ -65,7 +59,5 @@ export const editCocktail = async (url, uploadData) => {
 		}
 
 		return await response.json();
-	} catch (error) {
-		throw new Error(`Editing error! ${error}`);
-	}
+	
 };
