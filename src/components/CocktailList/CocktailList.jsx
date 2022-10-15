@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { filteredCocktailsSelector, isLoadingSelector } from "../../store/cocktail/cocktailSelector";
 
-import { COCKTAILS_FETCH_START } from "../../store/cocktail/cocktailActions";
-
 import { showModalWindow } from "../../store/modal/modalWindowSlice";
+import { fetchCocktailsToListStart } from "../../store/cocktail/cocktailSlice";
 
 import CocktailListItem from "../CocktailListItem";
 import Spinner from "../Spinner";
@@ -21,9 +20,8 @@ const CocktailList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (filteredCocktailsList.length === 0) {
-            dispatch({ type: COCKTAILS_FETCH_START });
-        }
+        filteredCocktailsList.length === 0 && dispatch(fetchCocktailsToListStart());
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

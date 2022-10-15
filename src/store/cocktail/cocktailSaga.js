@@ -15,12 +15,7 @@ import {
     editCocktailInListError,
 } from "./cocktailSlice";
 
-import {
-    COCKTAILS_FETCH_START,
-    NEW_COCKTAIL_POST_START,
-    COCKTAIL_DELETE_START,
-    COCKTAIL_EDIT_START,
-} from "./cocktailActions";
+import { hideModalWindow } from "../modal/modalWindowSlice";
 
 import { API_URL } from "../../services/config";
 
@@ -28,7 +23,6 @@ import { fetchCocktails, postNewCocktail, deleteCocktail, editCocktail } from ".
 
 function* fetchCocktailsFromApi() {
     try {
-        yield put(fetchCocktailsToListStart());
         const fetchedCocktails = yield call(fetchCocktails, API_URL);
         yield put(fetchCocktailsToListSuccess(fetchedCocktails));
     } catch (error) {
@@ -38,9 +32,9 @@ function* fetchCocktailsFromApi() {
 
 function* postCocktailToApi({ payload }) {
     try {
-        yield put(postCocktailToListStart());
         yield call(postNewCocktail, API_URL, payload);
         yield put(postCocktailToListSuccess(payload));
+        yield put(hideModalWindow());
     } catch (error) {
         yield put(postCocktailToListError(error));
     }
@@ -48,9 +42,9 @@ function* postCocktailToApi({ payload }) {
 
 function* deleteCocktailFromApi({ payload }) {
     try {
-        yield put(deleteCocktailFromListStart());
         yield call(deleteCocktail, API_URL, payload);
         yield put(deleteCocktailFromListSuccess(payload));
+        yield put(hideModalWindow());
     } catch (error) {
         yield put(deleteCocktailFromListError(error));
     }
@@ -58,35 +52,19 @@ function* deleteCocktailFromApi({ payload }) {
 
 function* editCocktailInApi({ payload }) {
     try {
-        yield put(editCocktailInListStart());
         yield call(editCocktail, API_URL, payload);
         yield put(editCocktailInListSuccess(payload));
+        yield put(hideModalWindow());
     } catch (error) {
         yield put(editCocktailInListError(error));
     }
 }
 
-function* watchFetchCocktailsFromApiSaga() {
-    yield takeEvery(COCKTAILS_FETCH_START, fetchCocktailsFromApi);
-}
-
-function* watchPostCocktailToApiSaga() {
-    yield takeEvery(NEW_COCKTAIL_POST_START, postCocktailToApi);
-}
-
-function* watchDeleteCocktailFromApiSaga() {
-    yield takeEvery(COCKTAIL_DELETE_START, deleteCocktailFromApi);
-}
-
-function* watchEditCocktailInApiSaga() {
-    yield takeEvery(COCKTAIL_EDIT_START, editCocktailInApi);
-}
-
 export function* cocktailSagas() {
     yield all([
-        call(watchFetchCocktailsFromApiSaga),
-        call(watchPostCocktailToApiSaga),
-        call(watchDeleteCocktailFromApiSaga),
-        call(watchEditCocktailInApiSaga),
+        takeEvery(deleteCocktailFromListStart.type, deleteCocktailFromApi),
+        takeEvery(postCocktailToListStart.type, postCocktailToApi),
+        takeEvery(editCocktailInListStart.type, editCocktailInApi),
+        takeEvery(fetchCocktailsToListStart.type, fetchCocktailsFromApi),
     ]);
 }

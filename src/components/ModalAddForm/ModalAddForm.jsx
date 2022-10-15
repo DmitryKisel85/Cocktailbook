@@ -18,17 +18,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
 import { hideModalWindow } from "../../store/modal/modalWindowSlice";
+import {
+    deleteCocktailFromListStart,
+    postCocktailToListStart,
+    editCocktailInListStart,
+} from "../../store/cocktail/cocktailSlice";
 
 import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
 import { isCocktailLoadingSelector } from "../../store/cocktail/cocktailSelector";
 
 import Spinner from "../Spinner";
-
-import {
-    NEW_COCKTAIL_POST_START,
-    COCKTAIL_DELETE_START,
-    COCKTAIL_EDIT_START,
-} from "../../store/cocktail/cocktailActions";
 
 import ModalAddFormInput from "../ModalAddFormInput";
 
@@ -153,17 +152,13 @@ const ModalAddForm = ({ isEdit }) => {
         }
 
         if (isEdit) {
-            dispatch({ type: COCKTAIL_EDIT_START, payload: { id: cocktailPreview.id, data: data } });
+            dispatch(editCocktailInListStart({ id: cocktailPreview.id, data: data }));
         } else {
             const newCocktail = {
                 id: uuidv4(),
                 ...data,
             };
-            dispatch({ type: NEW_COCKTAIL_POST_START, payload: newCocktail });
-        }
-
-        if (!isCocktailLoading) {
-            closeButtonHandler();
+            dispatch(postCocktailToListStart(newCocktail));
         }
     };
 
@@ -173,16 +168,12 @@ const ModalAddForm = ({ isEdit }) => {
     };
 
     const deleteItemHandler = () => {
-        dispatch({ type: COCKTAIL_DELETE_START, payload: cocktailPreview.id });
-
-        if (!isCocktailLoading) {
-            dispatch(hideModalWindow());
-        }
+        dispatch(deleteCocktailFromListStart(cocktailPreview.id));
     };
 
     return (
         <>
-            {isCocktailLoading === true ? (
+            {isCocktailLoading ? (
                 <Spinner />
             ) : (
                 <ThemeProvider theme={theme}>
