@@ -14,14 +14,12 @@ import styles from "./cocktailList.module.scss";
 
 const CocktailList = () => {
     const filteredCocktailsList = useSelector(filteredCocktailsSelector);
-
     const isLoading = useSelector(isLoadingSelector);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         filteredCocktailsList.length === 0 && dispatch(fetchCocktailsToListStart());
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

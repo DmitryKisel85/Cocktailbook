@@ -17,26 +17,10 @@
       "id": "3"
     },
     {
-      "name": "3333",
-      "ingredients": "3333",
-      "glass": "3333",
-      "imageUrl": "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png",
-      "method": "build",
-      "id": "ef33b1c7-0a44-466d-9def-15965876a29b"
-    },
-    {
-      "id": "d2655452-9b02-45d4-89c7-3aa1d825428e",
-      "name": "444",
-      "ingredients": "444",
-      "glass": "444",
-      "imageUrl": "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png",
-      "method": "build"
-    },
-    {
-      "id": "aad51f12-9420-4a22-9f8e-b728f1cf9faf",
-      "name": "555",
-      "ingredients": "555",
-      "glass": "555",
+      "id": "Negroni",
+      "name": "Negroni",
+      "ingredients": "qwe",
+      "glass": "qwe",
       "imageUrl": "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png",
       "method": "build"
     }

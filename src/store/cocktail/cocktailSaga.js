@@ -18,7 +18,6 @@ import {
 import { hideModalWindow } from "../modal/modalWindowSlice";
 
 import { API_URL } from "../../services/config";
-
 import { fetchCocktails, postNewCocktail, deleteCocktail, editCocktail } from "../../services/api";
 
 function* fetchCocktailsFromApi() {

@@ -28,7 +28,6 @@ import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelecto
 import { isCocktailLoadingSelector } from "../../store/cocktail/cocktailSelector";
 
 import Spinner from "../Spinner";
-
 import ModalAddFormInput from "../ModalAddFormInput";
 
 import { testImage } from "../../services/yupImageValidation";
@@ -158,6 +157,7 @@ const ModalAddForm = ({ isEdit }) => {
                 id: uuidv4(),
                 ...data,
             };
+
             dispatch(postCocktailToListStart(newCocktail));
         }
     };
