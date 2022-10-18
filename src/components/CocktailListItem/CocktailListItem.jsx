@@ -28,7 +28,7 @@ const CocktailListItem = ({ cocktail }) => {
 						<button className={styles.previewButton} onClick={handleShowEditCocktailModal}>
 							<i className={`${styles.previewIcon} fas fa-pen`}></i>
 						</button>
-						<Link to={`/cocktail/${id}`} className={styles.previewButton}>
+						<Link to={`/cocktails/${id}`} className={styles.previewButton}>
 							<i className={`${styles.previewIcon} fas fa-search`}></i>
 						</Link>
 					</div>

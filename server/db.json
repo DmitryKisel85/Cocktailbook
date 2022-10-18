@@ -1,0 +1,28 @@
+{
+  "cocktails": [
+    {
+      "name": "Negroni111eee",
+      "ingredients": "gin 30ml, campari 30ml, sweet red vermouth 30ml",
+      "glass": "old fashioned111ee",
+      "imageUrl": "https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg",
+      "method": "build",
+      "id": "2"
+    },
+    {
+      "name": "Manhattan424233123",
+      "ingredients": "rye whiskey 50ml, sweet red vermouth 20ml, Angostura bitters 1 dash",
+      "glass": "cocktail glass",
+      "imageUrl": "https://www.thecocktaildb.com/images/media/drink/yk70e31606771240.jpg",
+      "method": "stir",
+      "id": "3"
+    },
+    {
+      "id": "Negroni",
+      "name": "Negroni",
+      "ingredients": "qwe",
+      "glass": "qwe",
+      "imageUrl": "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png",
+      "method": "build"
+    }
+  ]
+}
