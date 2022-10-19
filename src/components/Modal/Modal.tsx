@@ -8,7 +8,11 @@ import { hideModalWindow } from "../../store/modal/modalWindowSlice";
 
 import styles from "./modal.module.scss";
 
-const Modal = ({ children }) => {
+interface ModalProps {
+    children: React.ReactNode;
+}
+
+const Modal = ({ children }: ModalProps) => {
     const modalState = useAppSelector(modalWindowIsOpenSelector);
 
     const dispatch = useAppDispatch();

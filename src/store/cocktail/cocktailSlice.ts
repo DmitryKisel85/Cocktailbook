@@ -24,7 +24,7 @@ const cocktailSlice = createSlice({
         searchCocktail: (state, action: PayloadAction<string>) => {
             state.searchTerm = action.payload;
         },
-        fetchCocktailsToListStart: (state, action) => {
+        fetchCocktailsToListStart: (state) => {
             state.isLoading = true;
         },
         fetchCocktailsToListSuccess: (state, action) => {
