@@ -1,22 +1,22 @@
 import { memo, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
 import { filteredCocktailsSelector, isLoadingSelector } from "../../store/cocktail/cocktailSelector";
 
 import { showModalWindow } from "../../store/modal/modalWindowSlice";
 import { fetchCocktailsToListStart } from "../../store/cocktail/cocktailSlice";
 
-import CocktailListItem from "../CocktailListItem";
-import Spinner from "../Spinner";
+import CocktailListItem from "../CocktailListItem/CocktailListItem";
+import Spinner from "../Spinner/Spinner";
 
 import styles from "./cocktailList.module.scss";
 
 const CocktailList = () => {
-    const filteredCocktailsList = useSelector(filteredCocktailsSelector);
-    const isLoading = useSelector(isLoadingSelector);
+    const filteredCocktailsList = useAppSelector(filteredCocktailsSelector);
+    const isLoading = useAppSelector(isLoadingSelector);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         filteredCocktailsList.length === 0 && dispatch(fetchCocktailsToListStart());

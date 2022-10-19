@@ -1,5 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
@@ -15,6 +17,7 @@ import {
     Container,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import { makeStyles } from "@mui/styles";
 
 import { hideModalWindow } from "../../store/modal/modalWindowSlice";
@@ -27,10 +30,12 @@ import {
 import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
 import { isCocktailLoadingSelector } from "../../store/cocktail/cocktailSelector";
 
-import Spinner from "../Spinner";
-import ModalAddFormInput from "../ModalAddFormInput";
+import Spinner from "../Spinner/Spinner";
+import ModalAddFormInput from "../ModalAddFormInput/ModalAddFormInput";
 
 import { testImage } from "../../services/yupImageValidation";
+
+import { IFormValues } from "types/generalTypes";
 
 // устанавливаем базовые настройки Material UI
 const theme = createTheme({
@@ -129,23 +134,27 @@ const schema = yup.object().shape({
         ),
 });
 
-const ModalAddForm = ({ isEdit }) => {
+interface IModalAddFormProps {
+    isEdit: boolean;
+}
+
+const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
     const {
         handleSubmit,
         control,
         reset,
         formState: { errors },
-    } = useForm({
+    } = useForm<IFormValues>({
         resolver: yupResolver(schema),
     });
 
-    const cocktailPreview = useSelector(modalWindowCocktailPreview);
-    const isCocktailLoading = useSelector(isCocktailLoadingSelector);
+    const cocktailPreview = useAppSelector(modalWindowCocktailPreview);
+    const isCocktailLoading = useAppSelector(isCocktailLoadingSelector);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const classes = useStyles();
 
-    const formSubmitHandler = (data) => {
+    const formSubmitHandler = (data: IFormValues) => {
         if (data.imageUrl === "") {
             data.imageUrl = "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png";
         }

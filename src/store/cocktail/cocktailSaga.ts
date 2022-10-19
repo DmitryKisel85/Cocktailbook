@@ -20,42 +20,52 @@ import { hideModalWindow } from "../modal/modalWindowSlice";
 import { API_URL } from "../../services/config";
 import { fetchCocktails, postNewCocktail, deleteCocktail, editCocktail } from "../../services/api";
 
+import { ICocktail, ICocktailAction, IEditCocktailAction, IDeleteCocktailAction } from "types/generalTypes";
+
 function* fetchCocktailsFromApi() {
     try {
-        const fetchedCocktails = yield call(fetchCocktails, API_URL);
+        const fetchedCocktails: Promise<ICocktail[]> = yield call(fetchCocktails, API_URL);
         yield put(fetchCocktailsToListSuccess(fetchedCocktails));
     } catch (error) {
-        yield put(fetchCocktailsToListError(error));
+        if (error instanceof Error) {
+            yield put(fetchCocktailsToListError(error.message));
+        }
     }
 }
 
-function* postCocktailToApi({ payload }) {
+function* postCocktailToApi({ payload }: ICocktailAction) {
     try {
         yield call(postNewCocktail, API_URL, payload);
         yield put(postCocktailToListSuccess(payload));
         yield put(hideModalWindow());
     } catch (error) {
-        yield put(postCocktailToListError(error));
+        if (error instanceof Error) {
+            yield put(postCocktailToListError(error.message));
+        }
     }
 }
 
-function* deleteCocktailFromApi({ payload }) {
+function* deleteCocktailFromApi({ payload }: IDeleteCocktailAction) {
     try {
         yield call(deleteCocktail, API_URL, payload);
         yield put(deleteCocktailFromListSuccess(payload));
         yield put(hideModalWindow());
     } catch (error) {
-        yield put(deleteCocktailFromListError(error));
+        if (error instanceof Error) {
+            yield put(deleteCocktailFromListError(error.message));
+        }
     }
 }
 
-function* editCocktailInApi({ payload }) {
+function* editCocktailInApi({ payload }: IEditCocktailAction) {
     try {
         yield call(editCocktail, API_URL, payload);
         yield put(editCocktailInListSuccess(payload));
         yield put(hideModalWindow());
     } catch (error) {
-        yield put(editCocktailInListError(error));
+        if (error instanceof Error) {
+            yield put(editCocktailInListError(error.message));
+        }
     }
 }
 
