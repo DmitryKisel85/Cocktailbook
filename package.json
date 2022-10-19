@@ -62,6 +62,7 @@
 		]
 	},
 	"devDependencies": {
+		"@types/uuid": "^8.3.4",
 		"concurrently": "^7.3.0",
 		"json-server": "^0.17.0"
 	}

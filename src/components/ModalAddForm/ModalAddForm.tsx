@@ -1,5 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
@@ -14,8 +16,9 @@ import {
     Typography,
     Container,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { useStyles } from "./modalAddFormStyles";
+import { theme } from "../../services/muiConfig";
 
 import { hideModalWindow } from "../../store/modal/modalWindowSlice";
 import {
@@ -27,94 +30,12 @@ import {
 import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
 import { isCocktailLoadingSelector } from "../../store/cocktail/cocktailSelector";
 
-import Spinner from "../Spinner";
-import ModalAddFormInput from "../ModalAddFormInput";
+import Spinner from "../Spinner/Spinner";
+import ModalAddFormInput from "../ModalAddFormInput/ModalAddFormInput";
 
 import { testImage } from "../../services/yupImageValidation";
 
-// устанавливаем базовые настройки Material UI
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#40312a",
-        },
-    },
-
-    typography: {
-        fontFamily: "Syne",
-        fontSize: 16,
-    },
-    breakpoints: {
-        values: {
-            tabletS: 768,
-            mobileL: 525,
-            mobileM: 450,
-            mobileS: 360,
-        },
-    },
-});
-
-// создаем стили для компонентов MUI
-const useStyles = makeStyles({
-    container: {
-        position: "relative!important",
-    },
-    formLabel: {
-        display: "block!important",
-        textAlign: "center!important",
-    },
-    radioGroup: {
-        display: "flex!important",
-        flexDirection: "row!important",
-        justifyContent: "center!important",
-        textAlign: "center!important",
-        [theme.breakpoints.down("mobileM")]: {
-            display: "grid!important",
-        },
-    },
-    buttonGroup: {
-        margin: "20px 0 0 0!important",
-        [theme.breakpoints.down("mobileM")]: {
-            margin: "10px 0 0 0!important",
-        },
-    },
-    button: {
-        fontWeight: "bold!important",
-        fontSize: [16, "!important"],
-    },
-    closeButton: {
-        position: "absolute!important",
-        right: "-45px!important",
-        top: "-35px!important",
-        fontSize: [32, "!important"],
-        [theme.breakpoints.down("mobileL")]: {
-            right: "-25px!important",
-            top: "-45px!important",
-        },
-        [theme.breakpoints.down("mobileM")]: {
-            right: "-35px!important",
-            top: "-35px!important",
-        },
-    },
-    helperText: {
-        position: "absolute!important",
-        bottom: "10px!important",
-        color: "#d32f2f!important",
-    },
-
-    title: {
-        textTransform: "uppercase",
-        [theme.breakpoints.down("tabletS")]: {
-            fontSize: [28, "!important"],
-        },
-        [theme.breakpoints.down("mobileL")]: {
-            fontSize: [26, "!important"],
-        },
-        [theme.breakpoints.down("mobileS")]: {
-            fontSize: [20, "!important"],
-        },
-    },
-});
+import { IFormValues } from "types/generalTypes";
 
 // устанавливаем валидацию элементов формы
 const schema = yup.object().shape({
@@ -129,28 +50,33 @@ const schema = yup.object().shape({
         ),
 });
 
-const ModalAddForm = ({ isEdit }) => {
+interface IModalAddFormProps {
+    isEdit: boolean;
+}
+
+const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
     const {
         handleSubmit,
         control,
         reset,
         formState: { errors },
-    } = useForm({
+    } = useForm<IFormValues>({
         resolver: yupResolver(schema),
     });
 
-    const cocktailPreview = useSelector(modalWindowCocktailPreview);
-    const isCocktailLoading = useSelector(isCocktailLoadingSelector);
+    const cocktailPreview = useAppSelector(modalWindowCocktailPreview);
 
-    const dispatch = useDispatch();
+    const isCocktailLoading = useAppSelector(isCocktailLoadingSelector);
+
+    const dispatch = useAppDispatch();
     const classes = useStyles();
 
-    const formSubmitHandler = (data) => {
+    const formSubmitHandler = (data: IFormValues) => {
         if (data.imageUrl === "") {
             data.imageUrl = "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png";
         }
 
-        if (isEdit) {
+        if (isEdit === true) {
             dispatch(editCocktailInListStart({ id: cocktailPreview.id, data: data }));
         } else {
             const newCocktail = {
@@ -187,33 +113,33 @@ const ModalAddForm = ({ isEdit }) => {
                                 label="Enter cocktail name"
                                 control={control}
                                 errors={errors}
-                                defaultValue={cocktailPreview?.name || ""}
+                                defaultValue={isEdit ? cocktailPreview?.name : ""}
                             />
                             <ModalAddFormInput
                                 name="ingredients"
                                 label="Put ingredients"
                                 control={control}
                                 errors={errors}
-                                defaultValue={cocktailPreview?.ingredients || ""}
+                                defaultValue={isEdit ? cocktailPreview?.ingredients : ""}
                             />
                             <ModalAddFormInput
                                 name="glass"
                                 label="Insert cocktail glass"
                                 control={control}
                                 errors={errors}
-                                defaultValue={cocktailPreview?.glass || ""}
+                                defaultValue={isEdit ? cocktailPreview?.glass : ""}
                             />
                             <ModalAddFormInput
                                 name="imageUrl"
                                 label="Enter image URL"
                                 control={control}
                                 errors={errors}
-                                defaultValue={cocktailPreview?.imageUrl || ""}
+                                defaultValue={isEdit ? cocktailPreview?.imageUrl : ""}
                             />
                             <Controller
                                 name="method"
                                 control={control}
-                                defaultValue={cocktailPreview?.method || "build"}
+                                defaultValue={isEdit ? cocktailPreview?.method : "build"}
                                 render={({ field }) => {
                                     return (
                                         <>

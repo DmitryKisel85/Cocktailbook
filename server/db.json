@@ -17,12 +17,12 @@
       "id": "3"
     },
     {
-      "id": "Negroni",
       "name": "Negroni",
       "ingredients": "qwe",
       "glass": "qwe",
       "imageUrl": "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png",
-      "method": "build"
+      "method": "build",
+      "id": "Negroni"
     }
   ]
 }
