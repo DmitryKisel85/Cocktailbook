@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
 import {
@@ -27,34 +26,23 @@ import {
     editCocktailInListStart,
 } from "../../store/cocktail/cocktailSlice";
 
-import { modalWindowCocktailPreview } from "../../store/modal/modalWindowSelector";
-import { isCocktailLoadingSelector } from "../../store/cocktail/cocktailSelector";
+import { modalWindowCocktailPreview } from "store/modal/modalWindowSelector";
+import { isCocktailLoadingSelector } from "store/cocktail/cocktailSelector";
 
 import Spinner from "../Spinner/Spinner";
 import ModalAddFormInput from "../ModalAddFormInput/ModalAddFormInput";
 
-import { testImage } from "../../services/yupImageValidation";
+import { useDuplicateAndValidation } from "hooks/useDuplicateAndValidation";
 
 import { IFormValues } from "types/generalTypes";
-
-// устанавливаем валидацию элементов формы
-const schema = yup.object().shape({
-    name: yup.string().min(2).required(),
-    ingredients: yup.string().min(2).required(),
-    method: yup.string(),
-    glass: yup.string().min(2).required(),
-    imageUrl: yup
-        .string()
-        .test("valid-image-url", "Must use valid image URL or leave input field empty", (value) =>
-            testImage(value, 1000).then((status) => status === "success")
-        ),
-});
 
 interface IModalAddFormProps {
     isEdit: boolean;
 }
 
 const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
+    const schema = useDuplicateAndValidation();
+
     const {
         handleSubmit,
         control,
@@ -65,7 +53,6 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
     });
 
     const cocktailPreview = useAppSelector(modalWindowCocktailPreview);
-
     const isCocktailLoading = useAppSelector(isCocktailLoadingSelector);
 
     const dispatch = useAppDispatch();
@@ -94,7 +81,8 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
     };
 
     const deleteItemHandler = () => {
-        dispatch(deleteCocktailFromListStart(cocktailPreview.id));
+        // dispatch(deleteCocktailFromListStart(cocktailPreview.id));
+        dispatch(deleteCocktailFromListStart(cocktailPreview.name));
     };
 
     return (

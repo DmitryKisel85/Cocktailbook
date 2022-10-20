@@ -23,6 +23,14 @@
       "imageUrl": "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png",
       "method": "build",
       "id": "Negroni"
+    },
+    {
+      "id": "dcf496aa-d188-4b3b-a6f8-00ad5cf6fba7",
+      "name": "margarita",
+      "ingredients": "tequila 50",
+      "glass": "34",
+      "imageUrl": "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png",
+      "method": "build"
     }
   ]
 }

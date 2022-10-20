@@ -11,6 +11,7 @@ import CocktailListItem from "../CocktailListItem/CocktailListItem";
 import Spinner from "../Spinner/Spinner";
 
 import styles from "./cocktailList.module.scss";
+import { ICocktail } from "types/generalTypes";
 
 const CocktailList = () => {
     const filteredCocktailsList = useAppSelector(filteredCocktailsSelector);
@@ -27,7 +28,7 @@ const CocktailList = () => {
         dispatch(showModalWindow({ typeOfModalWindow: "form" }));
     };
 
-    const cocktailListToRender = filteredCocktailsList.map((cocktail) => {
+    const cocktailListToRender = filteredCocktailsList.map((cocktail: ICocktail) => {
         return <CocktailListItem key={cocktail.id} cocktail={cocktail} />;
     });
 

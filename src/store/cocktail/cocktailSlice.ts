@@ -52,7 +52,8 @@ const cocktailSlice = createSlice({
         deleteCocktailFromListSuccess: (state, action: PayloadAction<string>) => {
             state.isCocktailLoading = false;
             state.cocktails = state.cocktails.filter((cocktail) => {
-                return cocktail.id !== action.payload;
+                return cocktail.name !== action.payload;
+                // return cocktail.id !== action.payload;
             });
         },
         deleteCocktailFromListError: (state, action: PayloadAction<string>) => {
