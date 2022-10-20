@@ -26,13 +26,6 @@ export const cocktailByIdSelector = (id: string) =>
         (cocktails) => cocktails.cocktails.filter((cocktail: { id: string }) => cocktail.id === id)
     );
 
-export const cocktailByNameSelector = (name: string) => {
-    createSelector(
-        (state: RootState) => state.cocktails,
-        (cocktails) => cocktails.cocktails.filter((cocktail: { name: string }) => cocktail.name === name)
-    );
-};
-
 export const searchTermSelector = createSelector(
     (state: RootState) => state.cocktails,
     (cocktails) => cocktails.searchTerm

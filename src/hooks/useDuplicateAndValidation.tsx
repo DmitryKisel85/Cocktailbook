@@ -1,8 +1,8 @@
 import * as yup from "yup";
-import { testImage } from "../services/yupImageValidation";
+import { testImage } from "services/yupImageValidation";
 
 import { useAppSelector } from "hooks/typedHooks";
-import { cocktailsSelector } from "../store/cocktail/cocktailSelector";
+import { cocktailsSelector } from "store/cocktail/cocktailSelector";
 
 export const useDuplicateAndValidation = () => {
     const cocktailsList = useAppSelector(cocktailsSelector);
@@ -15,7 +15,6 @@ export const useDuplicateAndValidation = () => {
             .test("unique-name", "This name is already exists. Please, choose another one!", (value) => {
                 return duplicateNameCheck(cocktailsList, value);
             }),
-        // name: yup.string().min(2).required(),
         ingredients: yup.string().min(2).required(),
         method: yup.string(),
         glass: yup.string().min(2).required(),
@@ -27,7 +26,9 @@ export const useDuplicateAndValidation = () => {
     });
 
     function duplicateNameCheck(cocktailsListTotal: any, enteredValue: any) {
-        const duplicateCocktailName = cocktailsListTotal.find((cocktail: any) => cocktail.name === enteredValue);
+        const duplicateCocktailName = cocktailsListTotal.find(
+            (cocktail: any) => cocktail.name.toLowerCase() === enteredValue.toLowerCase()
+        );
         if (duplicateCocktailName !== undefined) {
             return false;
         } else {

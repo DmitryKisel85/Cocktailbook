@@ -1,14 +1,13 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 import { useSearchParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
-import { searchCocktail } from "../../store/cocktail/cocktailSlice";
-import { searchTermSelector } from "../../store/cocktail/cocktailSelector";
+import { searchCocktail } from "store/cocktail/cocktailSlice";
+import { searchTermSelector } from "store/cocktail/cocktailSelector";
 
 import styles from "./searchBox.module.scss";
-import { useEffect } from "react";
 
 const SearchBox = () => {
     const searchTerm = useAppSelector(searchTermSelector);

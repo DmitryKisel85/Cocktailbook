@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import store, { persistor } from "./store";
 
-import Spinner from "./components/Spinner/Spinner";
+import Spinner from "./components/Spinner";
 
 if (document.getElementById("root")) {
     const root = ReactDOM.createRoot(document.getElementById("root") as Element);

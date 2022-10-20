@@ -1,9 +1,10 @@
 import { Controller, Control } from "react-hook-form";
 
 import { TextField, FormHelperText } from "@mui/material";
-import { useStyles } from "./modalAddFormInputStyles";
 
 import { IFormValues } from "types/generalTypes";
+
+import { useStyles } from "./modalAddFormInputStyles";
 
 interface IModalAddFormInputProps {
     name: "name" | "ingredients" | "method" | "glass" | "imageUrl";

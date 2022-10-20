@@ -2,16 +2,17 @@ import { memo, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
-import { filteredCocktailsSelector, isLoadingSelector } from "../../store/cocktail/cocktailSelector";
+import { filteredCocktailsSelector, isLoadingSelector } from "store/cocktail/cocktailSelector";
 
-import { showModalWindow } from "../../store/modal/modalWindowSlice";
-import { fetchCocktailsToListStart } from "../../store/cocktail/cocktailSlice";
+import { showModalWindow } from "store/modal/modalWindowSlice";
+import { fetchCocktailsToListStart } from "store/cocktail/cocktailSlice";
 
-import CocktailListItem from "../CocktailListItem/CocktailListItem";
-import Spinner from "../Spinner/Spinner";
+import CocktailListItem from "components/CocktailListItem";
+import Spinner from "components/Spinner";
+
+import { ICocktail } from "types/generalTypes";
 
 import styles from "./cocktailList.module.scss";
-import { ICocktail } from "types/generalTypes";
 
 const CocktailList = () => {
     const filteredCocktailsList = useAppSelector(filteredCocktailsSelector);

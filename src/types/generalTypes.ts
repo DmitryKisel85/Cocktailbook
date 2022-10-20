@@ -1,23 +1,18 @@
-export interface ICocktail {
+export interface ICocktail extends IFormValues {
     id: string;
-    name: string;
-    ingredients: string;
-    glass: string;
-    method: string;
-    imageUrl: string;
 }
 
-export interface ICocktailAction {
+export interface IPostCocktailActionPayload {
     type: string;
     payload: ICocktail;
 }
 
-export interface IEditCocktailAction {
+export interface IEditCocktailActionPayload {
     type: string;
     payload: { id: string; data: IFormValues };
 }
 
-export interface IDeleteCocktailAction {
+export interface IDeleteCocktailActionPayload {
     type: string;
     payload: string;
 }
@@ -28,4 +23,9 @@ export interface IFormValues {
     method: string;
     glass: string;
     imageUrl: string;
+}
+
+export interface IUpdateCocktailProps {
+    id: string;
+    data: IFormValues;
 }

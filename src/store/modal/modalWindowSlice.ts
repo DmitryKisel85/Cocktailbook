@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { ICocktail } from "../../types/generalTypes";
+import { ICocktail } from "types/generalTypes";
 
 interface InitialState {
     modalWindowIsOpen: boolean;

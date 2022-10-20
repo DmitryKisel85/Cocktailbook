@@ -1,16 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { useAppSelector } from "hooks/typedHooks";
 
-import { Link } from "react-router-dom";
-
 import { Divider, Chip, List, ListItem, Typography, Container, Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "../../services/muiConfig";
-import { useStyles } from "./cocktailPreviewPageStyles";
+import { theme } from "services/muiConfig";
 
-import { cocktailByIdSelector } from "../../store/cocktail/cocktailSelector";
-import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import { cocktailByIdSelector } from "store/cocktail/cocktailSelector";
+import NotFoundPage from "components/NotFoundPage";
+
+import { useStyles } from "./cocktailPreviewPageStyles";
 
 interface ICocktailParams {
     id: string;

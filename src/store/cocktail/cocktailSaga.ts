@@ -14,26 +14,17 @@ import {
     editCocktailInListSuccess,
     editCocktailInListError,
 } from "./cocktailSlice";
+import { hideModalWindow } from "store/modal/modalWindowSlice";
 
-import { hideModalWindow } from "../modal/modalWindowSlice";
+import { getCocktails, addCocktail, removeCocktail, updateCocktail } from "../../firebase/firebase";
 
-import { API_URL } from "../../services/config";
-import { fetchCocktails, postNewCocktail, deleteCocktail, editCocktail } from "../../services/api";
+import {
+    ICocktail,
+    IDeleteCocktailActionPayload,
+    IEditCocktailActionPayload,
+    IPostCocktailActionPayload,
+} from "types/generalTypes";
 
-import { getCocktails, addCocktail, removeCocktail } from "../../firebase/firebase";
-
-import { ICocktail, ICocktailAction, IEditCocktailAction, IDeleteCocktailAction } from "types/generalTypes";
-
-// function* fetchCocktailsFromApi() {
-//     try {
-//         const fetchedCocktails: Promise<ICocktail[]> = yield call(fetchCocktails, API_URL);
-//         yield put(fetchCocktailsToListSuccess(fetchedCocktails));
-//     } catch (error) {
-//         if (error instanceof Error) {
-//             yield put(fetchCocktailsToListError(error.message));
-//         }
-//     }
-// }
 function* fetchCocktailsFromApi() {
     try {
         const fetchedCocktails: Promise<ICocktail[]> = yield call(getCocktails);
@@ -45,7 +36,7 @@ function* fetchCocktailsFromApi() {
     }
 }
 
-function* postCocktailToApi({ payload }: ICocktailAction) {
+function* postCocktailToApi({ payload }: IPostCocktailActionPayload) {
     try {
         yield call(addCocktail, payload);
         yield put(postCocktailToListSuccess(payload));
@@ -56,19 +47,8 @@ function* postCocktailToApi({ payload }: ICocktailAction) {
         }
     }
 }
-// function* postCocktailToApi({ payload }: ICocktailAction) {
-//     try {
-//         yield call(postNewCocktail, API_URL, payload);
-//         yield put(postCocktailToListSuccess(payload));
-//         yield put(hideModalWindow());
-//     } catch (error) {
-//         if (error instanceof Error) {
-//             yield put(postCocktailToListError(error.message));
-//         }
-//     }
-// }
 
-function* deleteCocktailFromApi({ payload }: IDeleteCocktailAction) {
+function* deleteCocktailFromApi({ payload }: IDeleteCocktailActionPayload) {
     try {
         yield call(removeCocktail, payload);
         yield put(deleteCocktailFromListSuccess(payload));
@@ -79,21 +59,10 @@ function* deleteCocktailFromApi({ payload }: IDeleteCocktailAction) {
         }
     }
 }
-// function* deleteCocktailFromApi({ payload }: IDeleteCocktailAction) {
-//     try {
-//         yield call(deleteCocktail, API_URL, payload);
-//         yield put(deleteCocktailFromListSuccess(payload));
-//         yield put(hideModalWindow());
-//     } catch (error) {
-//         if (error instanceof Error) {
-//             yield put(deleteCocktailFromListError(error.message));
-//         }
-//     }
-// }
 
-function* editCocktailInApi({ payload }: IEditCocktailAction) {
+function* editCocktailInApi({ payload }: IEditCocktailActionPayload) {
     try {
-        yield call(editCocktail, API_URL, payload);
+        yield call(updateCocktail, payload);
         yield put(editCocktailInListSuccess(payload));
         yield put(hideModalWindow());
     } catch (error) {

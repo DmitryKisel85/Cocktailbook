@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
-import HomePage from "./components/HomePage/HomePage";
-import CocktailPreviewPage from "./components/CocktailPreviewPage/CocktailPreviewPage";
-import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
+import HomePage from "./components/HomePage";
+import CocktailPreviewPage from "./components/CocktailPreviewPage";
+import NotFoundPage from "./components/NotFoundPage";
 
 import styles from "./App.module.scss";
 

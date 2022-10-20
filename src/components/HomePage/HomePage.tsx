@@ -2,14 +2,14 @@ import { useEffect } from "react";
 
 import { useAppSelector } from "hooks/typedHooks";
 
-import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "../../store/modal/modalWindowSelector";
-import { useScrollLock } from "../../hooks/useScrollLock";
+import { modalWindowIsOpenSelector, modalWindowTypeSelector } from "store/modal/modalWindowSelector";
+import { useScrollLock } from "hooks/useScrollLock";
 
-import Header from "../Header/Header";
-import SearchBox from "../SearchBox/SearchBox";
-import CocktailList from "../CocktailList/CocktailList";
-import Modal from "../Modal/Modal";
-import ModalAddForm from "../ModalAddForm/ModalAddForm";
+import Header from "components/Header";
+import SearchBox from "components/SearchBox";
+import CocktailList from "components/CocktailList";
+import Modal from "components/Modal";
+import ModalAddForm from "components/ModalAddForm";
 
 import styles from "./homepage.module.scss";
 

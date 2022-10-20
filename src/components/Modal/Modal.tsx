@@ -2,9 +2,9 @@ import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
 import classNames from "classnames";
 
-import { modalWindowIsOpenSelector } from "../../store/modal/modalWindowSelector";
+import { modalWindowIsOpenSelector } from "store/modal/modalWindowSelector";
 
-import { hideModalWindow } from "../../store/modal/modalWindowSlice";
+import { hideModalWindow } from "store/modal/modalWindowSlice";
 
 import styles from "./modal.module.scss";
 
@@ -21,10 +21,10 @@ const Modal = ({ children }: ModalProps) => {
         dispatch(hideModalWindow());
     };
 
-    const modalActive = classNames(styles.modal, { [styles.active]: modalState });
+    const modalActiveClass = classNames(styles.modal, { [styles.active]: modalState });
 
     return (
-        <div className={modalActive} onClick={handleModalClose}>
+        <div className={modalActiveClass} onClick={handleModalClose}>
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 {children}
             </div>

@@ -1,11 +1,10 @@
-import { writeBatch } from "firebase/firestore";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { getFirestore, collection, query, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-import { ICocktail } from "types/generalTypes";
+import { ICocktail, IUpdateCocktailProps } from "types/generalTypes";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -20,28 +19,25 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
 export const getCocktails = async (): Promise<ICocktail[]> => {
     const collectionRef = collection(db, "cocktails");
     const q = query(collectionRef);
-
     const querySnapshot = await getDocs(q);
-
     return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as ICocktail);
 };
 
-export const addCocktail = async (cocktail: ICocktail) => {
-    const batch = writeBatch(db);
-    const collectionRef = collection(db, "cocktails");
-
-    const docRef = doc(collectionRef, cocktail.name.toLowerCase());
-    batch.set(docRef, cocktail);
-
-    await batch.commit();
+export const addCocktail = async (cocktail: ICocktail): Promise<void> => {
+    await setDoc(doc(db, "cocktails", cocktail.id), cocktail);
 };
 
-export const removeCocktail = async (name: string) => {
-    await deleteDoc(doc(db, "cocktails", name));
+export const removeCocktail = async (id: string): Promise<void> => {
+    await deleteDoc(doc(db, "cocktails", id));
+};
+
+export const updateCocktail = async ({ id, data }: IUpdateCocktailProps): Promise<void> => {
+    await setDoc(doc(db, "cocktails", id), data);
 };

@@ -3,7 +3,7 @@ import { useAppDispatch } from "hooks/typedHooks";
 import { Link } from "react-router-dom";
 import { ICocktail } from "types/generalTypes";
 
-import { showModalWindow } from "../../store/modal/modalWindowSlice";
+import { showModalWindow } from "store/modal/modalWindowSlice";
 
 import styles from "./cocktailListItem.module.scss";
 

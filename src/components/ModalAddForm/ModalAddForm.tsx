@@ -17,20 +17,20 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { useStyles } from "./modalAddFormStyles";
-import { theme } from "../../services/muiConfig";
+import { theme } from "services/muiConfig";
 
-import { hideModalWindow } from "../../store/modal/modalWindowSlice";
+import { hideModalWindow } from "store/modal/modalWindowSlice";
 import {
     deleteCocktailFromListStart,
     postCocktailToListStart,
     editCocktailInListStart,
-} from "../../store/cocktail/cocktailSlice";
+} from "store/cocktail/cocktailSlice";
 
 import { modalWindowCocktailPreview } from "store/modal/modalWindowSelector";
 import { isCocktailLoadingSelector } from "store/cocktail/cocktailSelector";
 
-import Spinner from "../Spinner/Spinner";
-import ModalAddFormInput from "../ModalAddFormInput/ModalAddFormInput";
+import Spinner from "components/Spinner";
+import ModalAddFormInput from "components/ModalAddFormInput";
 
 import { useDuplicateAndValidation } from "hooks/useDuplicateAndValidation";
 
@@ -81,8 +81,7 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
     };
 
     const deleteItemHandler = () => {
-        // dispatch(deleteCocktailFromListStart(cocktailPreview.id));
-        dispatch(deleteCocktailFromListStart(cocktailPreview.name));
+        dispatch(deleteCocktailFromListStart(cocktailPreview.id));
     };
 
     return (
