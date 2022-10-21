@@ -16,11 +16,11 @@ interface ICocktailParams {
 }
 
 const CocktailPreviewPage = () => {
-    const { id } = useParams<keyof ICocktailParams>() as ICocktailParams;
+    const { id } = useParams<keyof ICocktailParams>();
 
     const classes = useStyles();
 
-    const [cocktailPreview] = useAppSelector(cocktailByIdSelector(id));
+    const [cocktailPreview] = useAppSelector(cocktailByIdSelector(id!));
 
     if (!cocktailPreview) {
         return <NotFoundPage />;
