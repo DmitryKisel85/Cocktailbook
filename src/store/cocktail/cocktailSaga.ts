@@ -27,7 +27,7 @@ import {
 
 function* fetchCocktailsFromApi() {
     try {
-        const fetchedCocktails: Promise<ICocktail[]> = yield call(getCocktails);
+        const fetchedCocktails: ICocktail[] = yield call(getCocktails);
         yield put(fetchCocktailsToListSuccess(fetchedCocktails));
     } catch (error) {
         if (error instanceof Error) {

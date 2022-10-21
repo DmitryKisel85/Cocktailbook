@@ -27,7 +27,7 @@ const cocktailSlice = createSlice({
         fetchCocktailsToListStart: (state) => {
             state.isLoading = true;
         },
-        fetchCocktailsToListSuccess: (state, action) => {
+        fetchCocktailsToListSuccess: (state, action: PayloadAction<ICocktail[]>) => {
             state.cocktails.push(...action.payload);
             state.isLoading = false;
         },
@@ -35,14 +35,14 @@ const cocktailSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
+        postCocktailToListStart: (state, action: PayloadAction<ICocktail>) => {
+            state.isCocktailLoading = true;
+        },
         postCocktailToListSuccess: (state, action: PayloadAction<ICocktail>) => {
             state.isCocktailLoading = false;
             state.cocktails.push(action.payload);
         },
-        postCocktailToListStart: (state, action: PayloadAction<ICocktail>) => {
-            state.isCocktailLoading = true;
-        },
-        postCocktailToListError: (state, action: PayloadAction<string>) => {
+        postCocktailToListError: (state, action: PayloadAction<string | null>) => {
             state.isCocktailLoading = false;
             state.error = action.payload;
         },
@@ -55,7 +55,7 @@ const cocktailSlice = createSlice({
                 return cocktail.id !== action.payload;
             });
         },
-        deleteCocktailFromListError: (state, action: PayloadAction<string>) => {
+        deleteCocktailFromListError: (state, action: PayloadAction<string | null>) => {
             state.isCocktailLoading = false;
             state.error = action.payload;
         },

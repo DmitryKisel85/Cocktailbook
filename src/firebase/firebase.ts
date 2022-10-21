@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,21 +23,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-export const getCocktails = async (): Promise<ICocktail[]> => {
-    const collectionRef = collection(db, "cocktails");
-    const q = query(collectionRef);
-    const querySnapshot = await getDocs(q);
+export const getCocktails = async () => {
+    const querySnapshot = await getDocs(collection(db, "cocktails"));
     return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as ICocktail);
 };
-
-export const addCocktail = async (cocktail: ICocktail): Promise<void> => {
+export const addCocktail = async (cocktail: ICocktail) => {
     await setDoc(doc(db, "cocktails", cocktail.id), cocktail);
 };
 
-export const removeCocktail = async (id: string): Promise<void> => {
+export const removeCocktail = async (id: string) => {
     await deleteDoc(doc(db, "cocktails", id));
 };
 
-export const updateCocktail = async ({ id, data }: IUpdateCocktailProps): Promise<void> => {
+export const updateCocktail = async ({ id, data }: IUpdateCocktailProps) => {
     await setDoc(doc(db, "cocktails", id), data);
 };
