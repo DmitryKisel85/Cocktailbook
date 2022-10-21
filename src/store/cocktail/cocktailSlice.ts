@@ -71,6 +71,7 @@ const cocktailSlice = createSlice({
                         ...action.payload.data,
                     };
                 }
+
                 return cocktail;
             });
         },

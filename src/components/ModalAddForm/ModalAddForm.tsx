@@ -34,7 +34,7 @@ import ModalAddFormInput from "components/ModalAddFormInput";
 
 import { useDuplicateAndValidation } from "hooks/useDuplicateAndValidation";
 
-import { IFormValues } from "types/generalTypes";
+import { ICocktail, IFormValues } from "types/generalTypes";
 
 interface IModalAddFormProps {
     isEdit: boolean;
@@ -52,7 +52,7 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
         resolver: yupResolver(schema),
     });
 
-    const cocktailPreview = useAppSelector(modalWindowCocktailPreview);
+    const cocktailPreview: ICocktail = useAppSelector(modalWindowCocktailPreview);
     const isCocktailLoading = useAppSelector(isCocktailLoadingSelector);
 
     const dispatch = useAppDispatch();
