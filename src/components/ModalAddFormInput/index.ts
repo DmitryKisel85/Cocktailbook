@@ -1,2 +1,1 @@
-import "./ModalAddFormInput";
-export { default } from "./ModalAddFormInput";
+export * from "./ModalAddFormInput";

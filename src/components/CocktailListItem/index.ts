@@ -1,2 +1,1 @@
-import "./CocktailListItem";
-export { default } from "./CocktailListItem";
+export * from "./CocktailListItem";

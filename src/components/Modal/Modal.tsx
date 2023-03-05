@@ -1,35 +1,33 @@
+import { useCallback } from "react";
+import cx from "classnames";
+
 import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
-import classNames from "classnames";
-
 import { modalWindowIsOpenSelector } from "store/modal/modalWindowSelector";
-
 import { hideModalWindow } from "store/modal/modalWindowSlice";
 
-import styles from "./modal.module.scss";
+import s from "./modal.module.scss";
 
-interface ModalProps {
-    children: React.ReactNode;
+interface IModalProps {
+	children: React.ReactNode;
 }
 
-const Modal = ({ children }: ModalProps) => {
-    const modalState = useAppSelector(modalWindowIsOpenSelector);
+const Modal = ({ children }: IModalProps) => {
+	const modalIsOpen = useAppSelector(modalWindowIsOpenSelector);
 
-    const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
-    const handleModalClose = () => {
-        dispatch(hideModalWindow());
-    };
+	const handleModalClose = useCallback(() => {
+		dispatch(hideModalWindow());
+	}, [dispatch]);
 
-    const modalActiveClass = classNames(styles.modal, { [styles.active]: modalState });
-
-    return (
-        <div className={modalActiveClass} onClick={handleModalClose}>
-            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                {children}
-            </div>
-        </div>
-    );
+	return (
+		<div className={cx(s.root, { [s.active]: modalIsOpen })} onClick={handleModalClose}>
+			<div className={s.box} onClick={(e) => e.stopPropagation()}>
+				{children}
+			</div>
+		</div>
+	);
 };
 
-export default Modal;
+export { Modal };

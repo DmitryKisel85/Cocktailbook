@@ -1,9 +1,9 @@
 // проверка на валидность ссылки на изображение
-export const testImage = (url, timeout) =>
+export const testImage = (url: string | undefined, timeout: number) =>
 	new Promise((res) => {
 		timeout = timeout || 5000;
 		let timedOut = false;
-		let timer;
+		let timer: ReturnType<typeof setTimeout>;
 		const img = new Image();
 
 		img.onerror = img.onabort = function () {
@@ -24,7 +24,9 @@ export const testImage = (url, timeout) =>
 			url = "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png";
 		}
 
-		img.src = url;
+		if (url) {
+			img.src = url;
+		}
 
 		timer = setTimeout(function () {
 			timedOut = true;

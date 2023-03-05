@@ -1,6 +1,6 @@
-@import "../../styles/variables.scss";
+@import "styles/variables.scss";
 
-.modal {
+.root {
 	width: 100vw;
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.4);
@@ -14,12 +14,12 @@
 	pointer-events: none;
 }
 
-.modal.active {
+.root.active {
 	opacity: 1;
 	pointer-events: all;
 }
 
-.modalContent {
+.box {
 	width: 35vw;
 	border-radius: 12px;
 	display: flex;

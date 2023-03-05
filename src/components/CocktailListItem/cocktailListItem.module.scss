@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "styles/variables.scss";
 
 .root {
 	display: grid;
@@ -47,7 +47,7 @@
 	}
 }
 
-.descriptionHeader {
+.header {
 	width: 100%;
 	display: flex;
 	gap: 10px;
@@ -56,11 +56,11 @@
 	margin-bottom: 15px;
 }
 
-.description {
+.text {
 	margin-bottom: 10px;
 }
 
-.previewButton {
+.btn {
 	background-color: transparent;
 	border: 0;
 	cursor: pointer;
@@ -72,7 +72,7 @@
 	}
 }
 
-.previewIcon {
+.icon {
 	color: $textColor;
 	font-size: 20px;
 }

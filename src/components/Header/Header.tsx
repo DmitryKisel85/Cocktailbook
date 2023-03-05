@@ -1,13 +1,13 @@
 import { memo } from "react";
 
-import styles from "./header.module.scss";
+import s from "./header.module.scss";
 
-const Header = () => {
+const Header = memo(() => {
 	return (
-		<header className={styles.root}>
+		<header className={s.root}>
 			<h1>Personal Cocktail Book</h1>
 		</header>
 	);
-};
+});
 
-export default memo(Header);
+export { Header };
