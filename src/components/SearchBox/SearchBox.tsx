@@ -1,11 +1,10 @@
 import { ChangeEvent, useEffect } from "react";
-
 import { useSearchParams } from "react-router-dom";
-
-import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
 import { searchCocktail } from "store/cocktail/cocktailSlice";
 import { searchTermSelector } from "store/cocktail/cocktailSelector";
+
+import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
 import s from "./searchBox.module.scss";
 
@@ -34,7 +33,7 @@ const SearchBox = () => {
 		<input
 			type='text'
 			name='search'
-			className={s.box}
+			className={s.root}
 			placeholder='Search...'
 			value={searchTerm}
 			onChange={onChangeHandler}

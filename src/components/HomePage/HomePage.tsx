@@ -14,20 +14,19 @@ import { ModalAddForm } from "components/ModalAddForm";
 import s from "./homepage.module.scss";
 
 const HomePage = () => {
-	const modalState = useAppSelector(modalWindowIsOpenSelector);
+	const IsOpenModal = useAppSelector(modalWindowIsOpenSelector);
 	const typeOfModal = useAppSelector(modalWindowTypeSelector);
 
 	const { lockScroll, unlockScroll } = useScrollLock();
 
-	// блокируем скролл, когда открыто модальное окно
 	useEffect(() => {
-		if (modalState) {
+		if (IsOpenModal) {
 			lockScroll();
 		} else {
 			unlockScroll();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [modalState]);
+	}, [IsOpenModal]);
 
 	return (
 		<div className={s.root}>
@@ -35,10 +34,10 @@ const HomePage = () => {
 				<Header />
 				<SearchBox />
 				<CocktailList />
-				{modalState && (
+				{IsOpenModal && (
 					<Modal>
-						{typeOfModal === "form" && <ModalAddForm isEdit={false} />}
-						{typeOfModal === "edit" && <ModalAddForm isEdit={true} />}
+						{typeOfModal === "form" && <ModalAddForm />}
+						{typeOfModal === "edit" && <ModalAddForm isEdit />}
 					</Modal>
 				)}
 			</main>

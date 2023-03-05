@@ -1,8 +1,7 @@
 import { Controller, Control } from "react-hook-form";
-
 import { TextField, FormHelperText } from "@mui/material";
 
-import { IFormValues } from "types/generalTypes";
+import { IFormValues } from "types";
 
 import { useStyles } from "./modalAddFormInputStyles";
 

@@ -1,9 +1,22 @@
-@import "../../styles/variables.scss";
+@import "styles/variables.scss";
 
 :root {
 	--button: #40312a;
 	--button-color: #fff;
-	--bg: linear-gradient(45deg, #a27639 0%, #ae7f3d 11%, #bd8a42 21%, #c89246 31%, #cd974c 41%, #ce9b50 51%, #cf9e54 60%, #d1a25c 70%, #d4a768 80%, #d8ae74 90%, #dbb580 100%);
+	--bg: linear-gradient(
+		45deg,
+		#a27639 0%,
+		#ae7f3d 11%,
+		#bd8a42 21%,
+		#c89246 31%,
+		#cd974c 41%,
+		#ce9b50 51%,
+		#cf9e54 60%,
+		#d1a25c 70%,
+		#d4a768 80%,
+		#d8ae74 90%,
+		#dbb580 100%
+	);
 	--header: #40312a;
 	--color: #40312a;
 	--lit-header: #e6e6e6;
@@ -66,7 +79,8 @@
 	left: 0;
 	color: var(--shadow);
 	filter: blur(1.5vmin);
-	transform: scale(1.05) translate3d(0, 12%, -10vmin) translate(calc((var(--swing-x, 0) * 0.05) * 1%), calc((var(--swing-y) * 0.05) * 1%));
+	transform: scale(1.05) translate3d(0, 12%, -10vmin)
+		translate(calc((var(--swing-x, 0) * 0.05) * 1%), calc((var(--swing-y) * 0.05) * 1%));
 }
 .cloak {
 	animation: swing var(--speed) infinite alternate-reverse ease-in-out;

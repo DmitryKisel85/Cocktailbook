@@ -1,4 +1,6 @@
+import { useCallback } from "react";
 import { Link } from "react-router-dom";
+import cx from "classnames";
 
 import { useAppDispatch } from "hooks/typedHooks";
 
@@ -7,18 +9,18 @@ import { showModalWindow } from "store/modal/modalWindowSlice";
 import { ICocktail } from "types";
 
 import s from "./cocktailListItem.module.scss";
-
 interface ICocktailListItemProps {
 	cocktail: ICocktail;
 }
 
 const CocktailListItem = ({ cocktail }: ICocktailListItemProps) => {
 	const dispatch = useAppDispatch();
+
 	const { id, name, ingredients, method, glass, imageUrl } = cocktail;
 
-	const handleShowEditCocktailModal = () => {
+	const handleShowEditCocktailModal = useCallback(() => {
 		dispatch(showModalWindow({ typeOfModalWindow: "edit", previewCocktail: cocktail }));
-	};
+	}, [cocktail, dispatch]);
 
 	return (
 		<div className={s.root}>
@@ -30,10 +32,10 @@ const CocktailListItem = ({ cocktail }: ICocktailListItemProps) => {
 					<h2>{name}</h2>
 					<div className={s.btnsBlock}>
 						<button className={s.btn} onClick={handleShowEditCocktailModal}>
-							<i className={`${s.icon} fas fa-pen`}></i>
+							<i className={cx(s.icon, `fas fa-pen`)}></i>
 						</button>
 						<Link to={`/cocktails/${id}`} className={s.btn}>
-							<i className={`${s.icon} fas fa-search`}></i>
+							<i className={cx(s.icon, `fas fa-search`)}></i>
 						</Link>
 					</div>
 				</div>

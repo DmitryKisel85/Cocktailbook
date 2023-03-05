@@ -1,7 +1,4 @@
 import { useForm, Controller } from "react-hook-form";
-
-import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import { v4 as uuidv4 } from "uuid";
 
@@ -32,12 +29,14 @@ import { isCocktailLoadingSelector } from "store/cocktail/cocktailSelector";
 import { Spinner } from "components/Spinner";
 import { ModalAddFormInput } from "components/ModalAddFormInput";
 
+import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 import { useDuplicateAndValidation } from "hooks/useDuplicateAndValidation";
 
-import { ICocktail, IFormValues } from "types/generalTypes";
+import { IFormValues } from "types/generalTypes";
+import { useCallback } from "react";
 
 interface IModalAddFormProps {
-	isEdit: boolean;
+	isEdit?: boolean;
 }
 
 const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
@@ -52,7 +51,7 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
 		resolver: yupResolver(schema),
 	});
 
-	const cocktailPreview: ICocktail = useAppSelector(modalWindowCocktailPreview);
+	const { id, name, ingredients, glass, imageUrl, method } = useAppSelector(modalWindowCocktailPreview);
 	const isCocktailLoading = useAppSelector(isCocktailLoadingSelector);
 
 	const dispatch = useAppDispatch();
@@ -63,8 +62,8 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
 			data.imageUrl = "https://i.pinimg.com/originals/a3/b9/6f/a3b96f21beb326de113562c5062368e9.png";
 		}
 
-		if (isEdit === true) {
-			dispatch(editCocktailInListStart({ id: cocktailPreview.id, data: data }));
+		if (isEdit) {
+			dispatch(editCocktailInListStart({ id: id, data: data }));
 		} else {
 			const newCocktail = {
 				id: uuidv4(),
@@ -75,14 +74,14 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
 		}
 	};
 
-	const closeButtonHandler = () => {
+	const closeButtonHandler = useCallback(() => {
 		reset();
 		dispatch(hideModalWindow());
-	};
+	}, [dispatch, reset]);
 
-	const deleteItemHandler = () => {
-		dispatch(deleteCocktailFromListStart(cocktailPreview.id));
-	};
+	const deleteItemHandler = useCallback(() => {
+		dispatch(deleteCocktailFromListStart(id));
+	}, [dispatch, id]);
 
 	return (
 		<>
@@ -100,33 +99,33 @@ const ModalAddForm = ({ isEdit }: IModalAddFormProps) => {
 								label='Enter cocktail name'
 								control={control}
 								errors={errors}
-								defaultValue={isEdit ? cocktailPreview?.name : ""}
+								defaultValue={isEdit ? name : ""}
 							/>
 							<ModalAddFormInput
 								name='ingredients'
 								label='Put ingredients'
 								control={control}
 								errors={errors}
-								defaultValue={isEdit ? cocktailPreview?.ingredients : ""}
+								defaultValue={isEdit ? ingredients : ""}
 							/>
 							<ModalAddFormInput
 								name='glass'
 								label='Insert cocktail glass'
 								control={control}
 								errors={errors}
-								defaultValue={isEdit ? cocktailPreview?.glass : ""}
+								defaultValue={isEdit ? glass : ""}
 							/>
 							<ModalAddFormInput
 								name='imageUrl'
 								label='Enter image URL'
 								control={control}
 								errors={errors}
-								defaultValue={isEdit ? cocktailPreview?.imageUrl : ""}
+								defaultValue={isEdit ? imageUrl : ""}
 							/>
 							<Controller
 								name='method'
 								control={control}
-								defaultValue={isEdit ? cocktailPreview?.method : "build"}
+								defaultValue={isEdit ? method : "build"}
 								render={({ field }) => {
 									return (
 										<>

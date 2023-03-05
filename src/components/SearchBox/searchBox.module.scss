@@ -1,6 +1,6 @@
-@import "../../styles/variables.scss";
+@import "styles/variables.scss";
 
-.box {
+.root {
 	background: transparent;
 	margin-bottom: 20px;
 
@@ -38,7 +38,7 @@
 }
 
 @media screen and (max-width: $tabletS) {
-	.searchBox {
+	.root {
 		width: 75%;
 	}
 }

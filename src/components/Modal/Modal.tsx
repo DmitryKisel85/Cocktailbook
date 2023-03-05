@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import cx from "classnames";
 
 import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
@@ -12,16 +13,16 @@ interface IModalProps {
 }
 
 const Modal = ({ children }: IModalProps) => {
-	const modalState = useAppSelector(modalWindowIsOpenSelector);
+	const modalIsOpen = useAppSelector(modalWindowIsOpenSelector);
 
 	const dispatch = useAppDispatch();
 
-	const handleModalClose = () => {
+	const handleModalClose = useCallback(() => {
 		dispatch(hideModalWindow());
-	};
+	}, [dispatch]);
 
 	return (
-		<div className={cx(s.root, { [s.active]: modalState })} onClick={handleModalClose}>
+		<div className={cx(s.root, { [s.active]: modalIsOpen })} onClick={handleModalClose}>
 			<div className={s.box} onClick={(e) => e.stopPropagation()}>
 				{children}
 			</div>
