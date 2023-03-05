@@ -7,14 +7,14 @@ import { filteredCocktailsSelector, isListLoadingSelector } from "store/cocktail
 import { showModalWindow } from "store/modal/modalWindowSlice";
 import { fetchCocktailsToListStart } from "store/cocktail/cocktailSlice";
 
-import CocktailListItem from "components/CocktailListItem";
+import { CocktailListItem } from "components/CocktailListItem";
 import { Spinner } from "components/Spinner";
 
 import { ICocktail } from "types/generalTypes";
 
 import styles from "./cocktailList.module.scss";
 
-const CocktailList = () => {
+const CocktailList = memo(() => {
 	const filteredCocktailsList = useAppSelector(filteredCocktailsSelector);
 	const isListLoading = useAppSelector(isListLoadingSelector);
 
@@ -43,6 +43,6 @@ const CocktailList = () => {
 			</button>
 		</ul>
 	);
-};
+});
 
-export default memo(CocktailList);
+export { CocktailList };

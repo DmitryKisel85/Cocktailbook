@@ -7,7 +7,7 @@ import { useScrollLock } from "hooks/useScrollLock";
 
 import { Header } from "components/Header";
 import { SearchBox } from "components/SearchBox";
-import CocktailList from "components/CocktailList";
+import { CocktailList } from "components/CocktailList";
 import { Modal } from "components/Modal";
 import { ModalAddForm } from "components/ModalAddForm";
 

@@ -1,11 +1,12 @@
-import { useAppDispatch } from "hooks/typedHooks";
-
 import { Link } from "react-router-dom";
-import { ICocktail } from "types/generalTypes";
+
+import { useAppDispatch } from "hooks/typedHooks";
 
 import { showModalWindow } from "store/modal/modalWindowSlice";
 
-import styles from "./cocktailListItem.module.scss";
+import { ICocktail } from "types";
+
+import s from "./cocktailListItem.module.scss";
 
 interface ICocktailListItemProps {
 	cocktail: ICocktail;
@@ -20,29 +21,29 @@ const CocktailListItem = ({ cocktail }: ICocktailListItemProps) => {
 	};
 
 	return (
-		<div className={styles.root}>
-			<div className={styles.imgBlock}>
-				<img className={styles.img} src={imageUrl} alt='cocktail' />
+		<div className={s.root}>
+			<div className={s.imgBlock}>
+				<img className={s.img} src={imageUrl} alt='cocktail' />
 			</div>
-			<div className={styles.descriptionBlock}>
-				<div className={styles.descriptionHeader}>
+			<div className={s.descriptionBlock}>
+				<div className={s.header}>
 					<h2>{name}</h2>
-					<div className={styles.btnsBlock}>
-						<button className={styles.previewButton} onClick={handleShowEditCocktailModal}>
-							<i className={`${styles.previewIcon} fas fa-pen`}></i>
+					<div className={s.btnsBlock}>
+						<button className={s.btn} onClick={handleShowEditCocktailModal}>
+							<i className={`${s.icon} fas fa-pen`}></i>
 						</button>
-						<Link to={`/cocktails/${id}`} className={styles.previewButton}>
-							<i className={`${styles.previewIcon} fas fa-search`}></i>
+						<Link to={`/cocktails/${id}`} className={s.btn}>
+							<i className={`${s.icon} fas fa-search`}></i>
 						</Link>
 					</div>
 				</div>
-				<p className={styles.description}>
+				<p className={s.text}>
 					<b>Ingredients:</b> {ingredients}
 				</p>
-				<p className={styles.description}>
+				<p className={s.text}>
 					<b>Method:</b> {method}
 				</p>
-				<p className={styles.description}>
+				<p className={s.text}>
 					<b>Glass:</b> {glass}
 				</p>
 			</div>
@@ -50,4 +51,4 @@ const CocktailListItem = ({ cocktail }: ICocktailListItemProps) => {
 	);
 };
 
-export default CocktailListItem;
+export { CocktailListItem };
