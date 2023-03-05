@@ -9,32 +9,35 @@ import { ICocktail, IUpdateCocktailProps } from "types/generalTypes";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyC-4jgVWXM_xg9hQGKHLnXFQZlhZy8YBMk",
-    authDomain: "cocktaildb-42ab4.firebaseapp.com",
-    projectId: "cocktaildb-42ab4",
-    storageBucket: "cocktaildb-42ab4.appspot.com",
-    messagingSenderId: "251364030508",
-    appId: "1:251364030508:web:f0ad3ea011aea38f1d7989",
-    measurementId: "G-NR46X5BE48",
+	apiKey: "AIzaSyC-4jgVWXM_xg9hQGKHLnXFQZlhZy8YBMk",
+	authDomain: "cocktaildb-42ab4.firebaseapp.com",
+	projectId: "cocktaildb-42ab4",
+	storageBucket: "cocktaildb-42ab4.appspot.com",
+	messagingSenderId: "251364030508",
+	appId: "1:251364030508:web:f0ad3ea011aea38f1d7989",
+	measurementId: "G-NR46X5BE48",
 };
 
 // Initialize Firebase
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+// @ts-ignore
+// eslint-disable-next-line
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore();
 
 export const getCocktails = async () => {
-    const querySnapshot = await getDocs(collection(db, "cocktails"));
-    return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as ICocktail);
+	const querySnapshot = await getDocs(collection(db, "cocktails"));
+	return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as ICocktail);
 };
 export const addCocktail = async (cocktail: ICocktail) => {
-    await setDoc(doc(db, "cocktails", cocktail.id), cocktail);
+	await setDoc(doc(db, "cocktails", cocktail.id), cocktail);
 };
 
 export const removeCocktail = async (id: string) => {
-    await deleteDoc(doc(db, "cocktails", id));
+	await deleteDoc(doc(db, "cocktails", id));
 };
 
 export const updateCocktail = async ({ id, data }: IUpdateCocktailProps) => {
-    await updateDoc(doc(db, "cocktails", id), { ...data });
+	await updateDoc(doc(db, "cocktails", id), { ...data });
 };

@@ -1,2 +1,1 @@
-import "./HomePage";
-export { default } from "./HomePage";
+export * from "./HomePage";

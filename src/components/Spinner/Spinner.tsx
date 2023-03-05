@@ -1,11 +1,11 @@
-import styles from "./spinner.module.scss";
+import s from "./spinner.module.scss";
 
 const Spinner = () => {
 	return (
-		<div className={styles.spinnerOverlay}>
-			<div className={styles.spinnerContainer}></div>
+		<div className={s.overlay}>
+			<div className={s.container}></div>
 		</div>
 	);
 };
 
-export default Spinner;
+export { Spinner };

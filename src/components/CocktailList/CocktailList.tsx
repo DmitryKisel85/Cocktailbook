@@ -8,7 +8,7 @@ import { showModalWindow } from "store/modal/modalWindowSlice";
 import { fetchCocktailsToListStart } from "store/cocktail/cocktailSlice";
 
 import CocktailListItem from "components/CocktailListItem";
-import Spinner from "components/Spinner";
+import { Spinner } from "components/Spinner";
 
 import { ICocktail } from "types/generalTypes";
 

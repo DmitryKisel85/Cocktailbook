@@ -1,3 +1,1 @@
-import "./CocktailPreviewPage";
-
-export { default } from "./CocktailPreviewPage";
+export * from "./CocktailPreviewPage";

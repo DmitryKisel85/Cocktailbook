@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
@@ -8,19 +8,19 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import store, { persistor } from "./store";
 
-import Spinner from "./components/Spinner";
+import { Spinner } from "./components/Spinner";
 
 if (document.getElementById("root")) {
-    const root = ReactDOM.createRoot(document.getElementById("root") as Element);
-    root.render(
-        // <React.StrictMode>
-        <Router>
-            <Provider store={store}>
-                <PersistGate loading={<Spinner />} persistor={persistor}>
-                    <App />
-                </PersistGate>
-            </Provider>
-        </Router>
-        // </React.StrictMode>
-    );
+	const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+	root.render(
+		// <React.StrictMode>
+		<Router>
+			<Provider store={store}>
+				<PersistGate loading={<Spinner />} persistor={persistor}>
+					<App />
+				</PersistGate>
+			</Provider>
+		</Router>
+		// </React.StrictMode>
+	);
 }

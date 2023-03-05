@@ -7,57 +7,57 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "services/muiConfig";
 
 import { cocktailByIdSelector } from "store/cocktail/cocktailSelector";
-import NotFoundPage from "components/NotFoundPage";
+import { NotFoundPage } from "components/NotFoundPage";
 
 import { useStyles } from "./cocktailPreviewPageStyles";
 
 interface ICocktailParams {
-    id: string;
+	id: string;
 }
 
 const CocktailPreviewPage = () => {
-    const { id } = useParams<keyof ICocktailParams>();
+	const { id } = useParams<keyof ICocktailParams>();
 
-    const classes = useStyles();
+	const classes = useStyles();
 
-    const [cocktailPreview] = useAppSelector(cocktailByIdSelector(id!));
+	const [cocktailPreview] = useAppSelector(cocktailByIdSelector(id!));
 
-    if (!cocktailPreview) {
-        return <NotFoundPage />;
-    }
+	if (!cocktailPreview) {
+		return <NotFoundPage />;
+	}
 
-    const { name, ingredients, method, glass, imageUrl } = cocktailPreview;
+	const { name, ingredients, method, glass, imageUrl } = cocktailPreview;
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Container className={classes.container} disableGutters>
-                <Link to="/" className={classes.backButton}>
-                    <i className="fas fa-arrow-left"></i>
-                    <span> HOME</span>
-                </Link>
-                <Box className={classes.listImageBox}>
-                    <img id={name} src={imageUrl} className={classes.listImage} alt={name} />
-                </Box>
-                <List>
-                    <Typography component="h2" variant="h4" className={classes.listTitle}>
-                        {name}
-                    </Typography>
-                    <Divider>
-                        <Chip label="INGREDIENTS" />
-                    </Divider>
-                    <ListItem className={classes.listItem}>{ingredients}</ListItem>
-                    <Divider>
-                        <Chip label="METHOD" />
-                    </Divider>
-                    <ListItem className={classes.listItem}>{method}</ListItem>
-                    <Divider>
-                        <Chip label="GLASS" />
-                    </Divider>
-                    <ListItem className={classes.listItem}>{glass}</ListItem>
-                </List>
-            </Container>
-        </ThemeProvider>
-    );
+	return (
+		<ThemeProvider theme={theme}>
+			<Container className={classes.container} disableGutters>
+				<Link to='/' className={classes.backButton}>
+					<i className='fas fa-arrow-left'></i>
+					<span> HOME</span>
+				</Link>
+				<Box className={classes.listImageBox}>
+					<img id={name} src={imageUrl} className={classes.listImage} alt={name} />
+				</Box>
+				<List>
+					<Typography component='h2' variant='h4' className={classes.listTitle}>
+						{name}
+					</Typography>
+					<Divider>
+						<Chip label='INGREDIENTS' />
+					</Divider>
+					<ListItem className={classes.listItem}>{ingredients}</ListItem>
+					<Divider>
+						<Chip label='METHOD' />
+					</Divider>
+					<ListItem className={classes.listItem}>{method}</ListItem>
+					<Divider>
+						<Chip label='GLASS' />
+					</Divider>
+					<ListItem className={classes.listItem}>{glass}</ListItem>
+				</List>
+			</Container>
+		</ThemeProvider>
+	);
 };
 
-export default CocktailPreviewPage;
+export { CocktailPreviewPage };

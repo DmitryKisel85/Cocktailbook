@@ -7,38 +7,38 @@ import { IFormValues } from "types/generalTypes";
 import { useStyles } from "./modalAddFormInputStyles";
 
 interface IModalAddFormInputProps {
-    name: "name" | "ingredients" | "method" | "glass" | "imageUrl";
-    label: string;
-    control: Control<IFormValues>;
-    errors: any;
-    defaultValue: string;
+	name: "name" | "ingredients" | "method" | "glass" | "imageUrl";
+	label: string;
+	control: Control<IFormValues>;
+	errors: any;
+	defaultValue: string;
 }
 
 const ModalAddFormInput = ({ name, label, control, errors, defaultValue = "" }: IModalAddFormInputProps) => {
-    const classes = useStyles();
+	const classes = useStyles();
 
-    return (
-        <Controller
-            name={name}
-            control={control}
-            defaultValue={defaultValue}
-            render={({ field }) => (
-                <div style={{ position: "relative" }}>
-                    <TextField
-                        {...field}
-                        label={label}
-                        variant="outlined"
-                        error={!!errors[name]}
-                        className={classes.textField}
-                        fullWidth
-                    />
-                    <FormHelperText className={classes.helperText}>
-                        {errors ? errors[name]?.message : ""}
-                    </FormHelperText>
-                </div>
-            )}
-        />
-    );
+	return (
+		<Controller
+			name={name}
+			control={control}
+			defaultValue={defaultValue}
+			render={({ field }) => (
+				<div style={{ position: "relative" }}>
+					<TextField
+						{...field}
+						label={label}
+						variant='outlined'
+						error={!!errors[name]}
+						className={classes.textField}
+						fullWidth
+					/>
+					<FormHelperText className={classes.helperText}>
+						{errors ? errors[name]?.message : ""}
+					</FormHelperText>
+				</div>
+			)}
+		/>
+	);
 };
 
-export default ModalAddFormInput;
+export { ModalAddFormInput };
